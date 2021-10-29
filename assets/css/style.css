@@ -1,0 +1,19 @@
+.hero {
+  padding: 10rem 0;
+}
+.hero img {
+  width: 100%;
+}
+@media screen and (max-width: 768px) {
+  .hero {
+    padding-top: 5rem;
+  }
+}
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap%22");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Prompt", sans-serif;
+}
