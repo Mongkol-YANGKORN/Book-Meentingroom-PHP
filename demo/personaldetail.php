@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include '../connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register[]=</title>
+    <title>ข้อมูลส่วนตัว</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -50,66 +50,38 @@ session_start();
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="user_dashboard.php" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item  has-sub">
-                            <a href="form-layout.html" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>ข้อมูลผู้ใช้</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="component-alert.html">ข้อมูลผู้ใช้ทั้งหมด</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-badge.html">เพิ่มข้อมูลผู้ใช้</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-easel-fill"></i>
-                                <span>จัดการห้องประชุม</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="component-alert.html">ข้อมูลห้องประชุมทั้งหมด</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-badge.html">เพิ่มข้อมูลห้องประชุม</a>
-                                </li>
-                            </ul>
-                        </li>
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="user_bookroom.php" class='sidebar-link'>
                                 <i class="bi bi-display"></i>
                                 <span>จองห้องประชุม</span>
                             </a>
                         </li>
+
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="user_booklist.php" class='sidebar-link'>
                                 <i class="bi bi-credit-card"></i>
                                 <span>ข้อมูลการจอง</span>
                             </a>
                         </li>
+
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-collection-fill"></i>
-                                <span>รายงานสถิติประจำเดือน</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="user_personaldetail.php" class='sidebar-link'>
                                 <i class="bi bi-person-square"></i>
                                 <span>ข้อมูลส่วนตัว</span>
                             </a>
                         </li>
-
+                        <li class="sidebar-item  ">
+                            <a href="../index.html" class='sidebar-link'>
+                                <i class="bi bi-power"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
@@ -120,104 +92,97 @@ session_start();
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
-
-
-
             <section id="multiple-column-form">
                 <div class="row match-height">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">เพิ่มผู้ใช้งาน</h4>
+                                <h4 class="card-title">ข้อมูลผู้ใช้งาน</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="\backend\addmember.php">
+                                    <?php
+                                    if (!isset($_GET['action'])) {
+                                        $meSQL = "SELECT * FROM member";
+                                        $meQuery = $conn->query($meSQL);
+                                    ?>
+
                                         <div class="row">
+
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="ID_Member-column">รหัสผู้ใช้งาน</label>
-                                                    <input type="text" id="ID_Member-column" class="form-control" placeholder="รหัสผู้ใช้งาน" name="ID_Member">
+                                                    <br>
+                                                    <label></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="Member_Name-column">ชื่อ-นามสกุล</label>
-                                                    <input type="text" id="Member_Name-column" class="form-control" placeholder="ชื่อ-นามสกุล" name="Member_Name">
+
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="Username-column">Username</label>
-                                                    <input type="text" id="Username-column" class="form-control" placeholder="Username" name="city-column">
+
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="Password-column">Password</label>
-                                                    <input type="password" id="Password-column" class="form-control" name="Username" placeholder="Password">
+
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label>แผนก</label>
-                                                    <?php
-                                                    include '../connect.php';
-                                                    $sql = "SELECT * FROM Division ORDER BY Division_Name asc";
-                                                    $result = $conn->query($sql);
-                                                    ?>
 
-                                                    <select name="ID_Division" id="ID_Division" class="form-select"> ;
-                                                        <option selected>เลือก..</option>
-                                                        <?php foreach ($result as $results) { ?>
-                                                            <option value="<?php echo $results["ID_Division"]; ?>">
-                                                                <?php echo $results["Division_Name"]; ?>
-                                                            </option>
-                                                        <?php } ?>
-                                                    </select>
+
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="Job_title-column">ตำแหน่งงาน</label>
-                                                    <input type="text" id="Job_title-column" class="form-control" name="Job_title" placeholder="ตำแหน่งงาน">
+
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="Responsibility-column">บทบาท</label>
-                                                    <select name="Responsibility" id="Responsibility" class="form-select">
-                                                        <option selected>เลือก..</option>
-                                                        <option value="Admin">Admin</option>
-                                                        <option value="User">User</option>
-                                                    </select>
+
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="Member_Tel-column">เบอร์โทรศัพท์</label>
-                                                    <input type="text" id="Member_Tel-column" class="form-control" name="Member_Tel" placeholder="เบอร์โทรศัพท์">
+
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="Address-column">ที่อยู่</label>
-                                                    <input type="text" id="Address-column" class="form-control" name="Address" placeholder="ที่อยู่">
+
                                                 </div>
                                             </div>
+
                                             <div class="col-12 d-flex justify-content-end">
-                                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                                <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+
+                                                <button type="" class="btn-sm btn-warning me-1 mb-1">แก้ไข</button>
+                                                <button type="" class="btn-sm btn-danger me-1 mb-1">ลบ</button>
                                             </div>
 
                                         </div>
-                                    </form>
+
+                                    <?php } ?>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
 
         </div>
 

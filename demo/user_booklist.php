@@ -29,6 +29,10 @@ include '../connect.php';
             font-family: "Prompt", sans-serif;
         }
     </style>
+    <!-- datetime -->
+    <link rel="stylesheet" href="js/jquery.datetimepicker.min.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.datetimepicker.full.js"></script>
 </head>
 
 <body>
@@ -38,7 +42,7 @@ include '../connect.php';
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="../index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -50,69 +54,38 @@ include '../connect.php';
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.php" class='sidebar-link'>
+                            <a href="user_dashboard.php" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item  has-sub">
-                            <a class='sidebar-link'>
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>ข้อมูลผู้ใช้</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="memberlist.php">ข้อมูลผู้ใช้ทั้งหมด</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="memberRigister.php">เพิ่มข้อมูลผู้ใช้</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-easel-fill"></i>
-                                <span>จัดการห้องประชุม</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="component-alert.html">ข้อมูลห้องประชุมทั้งหมด</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-badge.html">เพิ่มข้อมูลห้องประชุม</a>
-                                </li>
-                            </ul>
-                        </li>
-
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="user_bookroom.php" class='sidebar-link'>
                                 <i class="bi bi-display"></i>
                                 <span>จองห้องประชุม</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="user_booklist.php" class='sidebar-link'>
                                 <i class="bi bi-credit-card"></i>
                                 <span>ข้อมูลการจอง</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-collection-fill"></i>
-                                <span>รายงานสถิติประจำเดือน</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="user_personaldetail.php" class='sidebar-link'>
                                 <i class="bi bi-person-square"></i>
                                 <span>ข้อมูลส่วนตัว</span>
                             </a>
                         </li>
-
+                        <li class="sidebar-item  ">
+                            <a href="../index.html" class='sidebar-link'>
+                                <i class="bi bi-power"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
@@ -123,36 +96,72 @@ include '../connect.php';
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
-
-
-
             <section id="multiple-column-form">
                 <div class="row match-height">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">ข้อมูลห้องประชุม</h4>
+                                <h4 class="card-title">ข้อมูลการจอง</h4>
                             </div>
                             <section class="section">
                                 <div class="card">
                                     <div class="card-body">
+                                        <form class="form" method="post" action="demo\backend\#">
+                                            <div class="row">
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>ห้องประชุม</label>
+                                                        <?php
+                                                        include '../connect.php';
+                                                        $sql = "SELECT * FROM Room ORDER BY Room_Name asc";
+                                                        $result = $conn->query($sql);
+                                                        ?>
+                                                        <select name="ID_Room" id="ID_Room" class="form-select"> ;
+                                                            <option selected>เลือก..</option>
+                                                            <?php foreach ($result as $results) { ?>
+                                                                <option value="<?php echo $results["ID_Room"]; ?>">
+                                                                    <?php echo $results["Room_Name"]; ?>
+                                                                </option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group has-icon-left">
+                                                        <label for="ID_Member-column">วันที่จอง</label>
+                                                        <div class="position-relative">
+                                                            <input id="datetime" class="form-control" placeholder="เลือกวันที่จอง" />
+                                                            <script>
+                                                                $("#datetime").datetimepicker({
+                                                                    step: 15
+                                                                });
+                                                            </script>
+                                                            <div class="form-control-icon">
+                                                                <i class="bi bi-clock"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 d-flex justify-content-end">
+                                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">ค้นหา</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                         <table class="table table-striped" id="table1">
                                             <thead>
                                                 <tr>
                                                     <th>ลำดับ</th>
-                                                    <th>รหัสห้อง</th>
-                                                    <th>ชื่อห้อง</th>
-                                                    <th>จำนวนที่นั่ง</th>
-                                                    <th>สิ่งอำนวยความสะดวก</th>
-                                                    <th>รายละเอียดเพิ่มเติม</th>
+                                                    <th>ห้องประชุม</th>
+                                                    <th>วัน-เวลา</th>
+                                                    <th>หัวข้อการประชุม</th>
+                                                    <th>ชื่อผู้จอง</th>
                                                     <th>แสดง</th>
-                                                    <th>แก้ไข</th>
-                                                    <th>ลบ</th>
                                                 </tr>
                                             </thead>
                                             <?php
                                             if (!isset($_GET['action'])) {
-                                                $meSQL = "SELECT * FROM room ORDER BY ID_Room asc";
+                                                $meSQL = "SELECT * FROM Booked ";
                                                 $meQuery = $conn->query($meSQL);
                                             ?>
                                                 <tbody>
@@ -161,26 +170,16 @@ include '../connect.php';
                                                     while ($rs = $meQuery->fetch(PDO::FETCH_ASSOC)) {
                                                     ?>
                                                         <tr>
-
                                                             <td> <?php echo $i++ ?> </td>
-
-                                                            <td><?php echo $rs['ID_Room'] ?></td>
-                                                            <td><?php echo $rs['Room_Name'] ?></td>
-                                                            <td><?php echo $rs['Num_Seat'] ?></td>
+                                                            <td> <?php //echo $rs['Room_Name'] 
+                                                                    ?></td>
+                                                            <td><?php echo $rs['Event_Start'] ?></td>
+                                                            <td><?php //echo $rs['Num_Seat'] 
+                                                                ?></td>
                                                             <td>รอลูกแพะมาทำ</td>
-                                                            <td><?php echo $rs['Room_Dscription'] ?></td>
-
                                                             <td>
                                                                 <a href="#" class="btn-sm btn-success">แสดง</a>
                                                             </td>
-                                                            <td>
-                                                                <a href="#" class="btn-sm btn-warning">แก้ไข</a>
-                                                            </td>
-                                                            <td>
-                                                                <a href="#" class="btn-sm btn-danger">ลบ</a>
-                                                            </td>
-
-
                                                         </tr>
                                                     <?php } ?>
                                                 </tbody>
@@ -193,6 +192,9 @@ include '../connect.php';
                     </div>
                 </div>
             </section>
+
+
+
 
         </div>
 

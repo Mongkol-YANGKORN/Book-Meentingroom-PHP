@@ -116,30 +116,39 @@ session_start();
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
-
-
-
             <section id="multiple-column-form">
                 <div class="row match-height">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">ข้อมูลห้องประชุม</h4>
+                                <h4 class="card-title">แสดงข้อมูลห้องประชุม</h4>
                             </div>
+                            <section class="section">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form class="form" method="post" action="demo\backend\#">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="Address-column">หัวข้อการประชุม</label>
 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </section>
 
                         </div>
                     </div>
                 </div>
             </section>
-
         </div>
-
     </div>
     </div>
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-
     <script src="assets/js/main.js"></script>
 </body>
 

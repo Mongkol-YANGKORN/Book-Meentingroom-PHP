@@ -127,16 +127,17 @@ include '../connect.php';
                                 <div class="card-body">
                                     <?php
                                     if (!isset($_GET['action'])) {
-                                        $meSQL = "SELECT * FROM member ORDER BY ID_Member asc";
+                                        $meSQL = "SELECT * FROM member";
                                         $meQuery = $conn->query($meSQL);
                                     ?>
 
                                         <div class="row">
+
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="ID_Member-column">รหัสผู้ใช้งาน</label>
                                                     <br>
-                                                    <label><?php echo ['ID_Member'] ?></label>
+                                                    <label></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">

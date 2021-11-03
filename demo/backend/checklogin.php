@@ -1,30 +1,27 @@
 <?php
 session_start();
-include '../connect.php';
-$user = $_POST['Username'];
-$pass = $_POST['Password'];
-$sql = "SELECT * FROM `member` where Username = '" . $user . "' && Password = '" . $pass . "'";
-$result = $conn->query($sql);
-//echo $sql;
-if ($result->num_rows > 0) {
+//Connect MSSQL
+$serverName = 'localhost';
+$userName = 'sa';
+$userPassword = 'Hunterman1328!';
+$dbName = 'meetingroom';
 
-    while ($data = $result->fetch_object()) {
-        $role = $data->ID_Division;
-        $_SESSION['role'] = $role;
-        $_SESSION['name'] = $data->Username;
-
-        if ($role == "developers") {
-            echo $role;
-            header("refresh: 1; url=/meetingroom/demo/index.php"); //admin
-            exit(0);
-        } else {
-            echo $role;
-            header("refresh: 1; url=/meetingroom/demo/index.php"); //User
-        }
-    }
-} else {
-    echo 'เข้าสู่ระบบผิดพลาด';
-    header("refresh: 1; url=/meetingroom/demo/auth-login.php");
-    exit(0);
+try {
+    $conn = new PDO("sqlsrv:server=$serverName ; Database = $dbName", $userName, $userPassword);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (Exception $e) {
+    die(print_r($e->getMessage()));
 }
-$conn->close();
+
+if (isset($_POST['Username'])) {
+    $user = $_POST['Username'];
+}
+if (isset($_POST['Password'])) {
+    $pass = $_POST['Username'];
+}
+
+$meSQL = "SELECT * FROM member where Username = $user  and Password = $pass ";
+
+$meQuery = $conn->query($meSQL);
+
+echo $meSQL;

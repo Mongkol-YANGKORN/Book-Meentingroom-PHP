@@ -24,7 +24,7 @@
                     <h1 class="auth-title">Log in.</h1>
 
 
-                    <form method="post" action="checklogin.php">
+                    <form method="post" action="backend\checklogin.php">
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" name="Username" class="form-control form-control-xl" placeholder="Username">
                             <div class="form-control-icon">
@@ -46,7 +46,7 @@
             <div class="col-lg-7 d-none d-lg-block">
                 <div id="auth-right">
                     <div class="col-lg-6 col-12 order-1 order-md-2">
-                        <img src="" alt="Demo  Image" />
+
                     </div>
                 </div>
             </div>

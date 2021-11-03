@@ -49,64 +49,39 @@ include '../connect.php';
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item">
-                            <a href="index.php" class='sidebar-link'>
+                        <li class="sidebar-item  ">
+                            <a href="user_dashboard.php" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item  has-sub">
-                            <a href="form-layout.html" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>ข้อมูลผู้ใช้</span>
+                        <li class="sidebar-item  ">
+                            <a href="user_bookroom.php" class='sidebar-link'>
+                                <i class="bi bi-display"></i>
+                                <span>จองห้องประชุม</span>
                             </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="component-alert.html">ข้อมูลผู้ใช้ทั้งหมด</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-badge.html">เพิ่มข้อมูลผู้ใช้</a>
-                                </li>
-                            </ul>
                         </li>
 
-                        <li class="sidebar-item  has-sub">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-easel-fill"></i>
-                                <span>จัดการห้องประชุม</span>
-                            </a>
-                            <ul class="submenu">
-                                <li class="submenu-item ">
-                                    <a href="component-alert.html">ข้อมูลห้องประชุมทั้งหมด</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-badge.html">เพิ่มข้อมูลห้องประชุม</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
+                        <li class="sidebar-item  ">
+                            <a href="user_booklist.php" class='sidebar-link'>
                                 <i class="bi bi-credit-card"></i>
                                 <span>ข้อมูลการจอง</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-collection-fill"></i>
-                                <span>รายงานสถิติประจำเดือน</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
+                        <li class="sidebar-item  ">
+                            <a href="user_personaldetail.php" class='sidebar-link'>
                                 <i class="bi bi-person-square"></i>
                                 <span>ข้อมูลส่วนตัว</span>
                             </a>
                         </li>
-
+                        <li class="sidebar-item  ">
+                            <a href="../index.html" class='sidebar-link'>
+                                <i class="bi bi-power"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
@@ -117,7 +92,6 @@ include '../connect.php';
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
-
             <div class="page-heading">
                 <h3>Dashboard</h3>
             </div>
