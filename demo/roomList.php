@@ -38,13 +38,13 @@ include '../connect.php';
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="../index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                            <img src="../demo/assets/images/logo/logo2.png" alt="Logo">
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                         </div>
                     </div>
-                </div>l;
+                </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
@@ -68,51 +68,63 @@ include '../connect.php';
                                 <li class="submenu-item ">
                                     <a href="memberRigister.php">เพิ่มข้อมูลผู้ใช้</a>
                                 </li>
+
                             </ul>
                         </li>
 
                         <li class="sidebar-item  has-sub">
-                            <a href="index.html" class='sidebar-link'>
+                            <a class='sidebar-link'>
                                 <i class="bi bi-easel-fill"></i>
                                 <span>จัดการห้องประชุม</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="component-alert.html">ข้อมูลห้องประชุมทั้งหมด</a>
+                                    <a href="roomList.php">ข้อมูลห้องประชุมทั้งหมด</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-badge.html">เพิ่มข้อมูลห้องประชุม</a>
+                                    <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
                             </ul>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="book_room.php" class='sidebar-link'>
                                 <i class="bi bi-display"></i>
                                 <span>จองห้องประชุม</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="book_detail.php" class='sidebar-link'>
                                 <i class="bi bi-credit-card"></i>
-                                <span>ข้อมูลการจอง</span>
+                                <span>ข้อมูลการจองของฉัน</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="book_user.php" class='sidebar-link'>
+                                <i class="bi bi-credit-card-2-back-fill"></i>
+                                <span>ข้อมูลการจองของผู้ใช้งาน</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="statistics.php" class='sidebar-link'>
                                 <i class="bi bi-collection-fill"></i>
                                 <span>รายงานสถิติประจำเดือน</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="personaldetail.php" class='sidebar-link'>
                                 <i class="bi bi-person-square"></i>
                                 <span>ข้อมูลส่วนตัว</span>
                             </a>
                         </li>
-
+                        <li class="sidebar-item  ">
+                            <a href="../index.html" class='sidebar-link'>
+                                <i class="bi bi-power"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
@@ -146,14 +158,17 @@ include '../connect.php';
                                                     <th>สิ่งอำนวยความสะดวก</th>
                                                     <th>รายละเอียดเพิ่มเติม</th>
                                                     <th>แสดง</th>
-                                                    <th>แก้ไข</th>
+                                                    <th>เพิ่ม/แก้ไขอุปกรณ์</th>
+                                                    <th>แก้ไขห้องประชุม</th>
                                                     <th>ลบ</th>
                                                 </tr>
                                             </thead>
                                             <?php
                                             if (!isset($_GET['action'])) {
-                                                $meSQL = "SELECT * FROM room ORDER BY ID_Room asc";
+                                                $meSQL = ("SELECT * from Room INNER JOIN dbo.Room_Detail ON Room.ID_Room = Room_Detail.ID_Room 
+                                                inner join dbo.Equipment on Equipment.ID_Equipment = Room_Detail.ID_Equipment ORDER BY dbo.Room.ID_Room asc");
                                                 $meQuery = $conn->query($meSQL);
+
                                             ?>
                                                 <tbody>
                                                     <?php
@@ -167,14 +182,23 @@ include '../connect.php';
                                                             <td><?php echo $rs['ID_Room'] ?></td>
                                                             <td><?php echo $rs['Room_Name'] ?></td>
                                                             <td><?php echo $rs['Num_Seat'] ?></td>
-                                                            <td>รอลูกแพะมาทำ</td>
+                                                            <td><?php echo $rs['Equipment_Name'] ?></td>
                                                             <td><?php echo $rs['Room_Dscription'] ?></td>
 
+                                                            <!-- link เข้าแต่ละหน้า -->
                                                             <td>
-                                                                <a href="#" class="btn-sm btn-success">แสดง</a>
+                                                                <a href="roomShow.php" class="btn-sm btn-success">แสดง</a>
                                                             </td>
                                                             <td>
-                                                                <a href="#" class="btn-sm btn-warning">แก้ไข</a>
+
+                                                                <a href="roomAddEquipment.php" class="btn-sm btn-info">เพิ่ม/แก้ไขอุปกรณ์</a>
+                                                            </td>
+                                                            <td>
+                                                                <?php //ยังไม่เสร็จ
+                                                                echo "<a href='roomEdit.php?ID_Room=$rs[0]' class='btn-sm btn-warning' >แก้ไขห้องประชุม</a>";
+                                                                ?>
+                                                                <!--a href="roomEdit.php?ID_Room=<?php //echo $result["ID_Room"]; 
+                                                                                                    ?>" class="btn-sm btn-warning">แก้ไขห้องประชุม</-a> -->
                                                             </td>
                                                             <td>
                                                                 <a href="#" class="btn-sm btn-danger">ลบ</a>
@@ -184,7 +208,7 @@ include '../connect.php';
                                                         </tr>
                                                     <?php } ?>
                                                 </tbody>
-                                            <?php } ?>
+                                            <?php  } ?>
                                         </table>
                                     </div>
                                 </div>

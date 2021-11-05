@@ -97,7 +97,7 @@ include '../connect.php';
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">ข้อมูลผู้ใช้งาน</h4>
+                                <h4 class="card-title">ข้อมูลส่วนตัว</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
@@ -168,7 +168,7 @@ include '../connect.php';
 
                                             <div class="col-12 d-flex justify-content-end">
 
-                                                <button type="" class="btn-sm btn-warning me-1 mb-1">แก้ไข</button>
+                                                <button href="user_editpersonldetail.php" class="btn-sm btn-warning me-1 mb-1">แก้ไข</button>
                                                 <button type="" class="btn-sm btn-danger me-1 mb-1">ลบ</button>
                                             </div>
 

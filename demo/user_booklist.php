@@ -157,6 +157,8 @@ include '../connect.php';
                                                     <th>หัวข้อการประชุม</th>
                                                     <th>ชื่อผู้จอง</th>
                                                     <th>แสดง</th>
+                                                    <th>แก้ไข</th>
+                                                    <th>ยกเลิก</th>
                                                 </tr>
                                             </thead>
                                             <?php

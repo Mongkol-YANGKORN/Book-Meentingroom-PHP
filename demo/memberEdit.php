@@ -140,38 +140,84 @@ session_start();
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">แสดงข้อมูลห้องประชุม</h4>
+                                <h4 class="card-title">แก้ไขข้อมูลผู้ใช้งาน</h4>
                             </div>
                             <section class="section">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form class="form" method="post" action="demo\backend\#">
+                                        <form class="form" method="post" action="backend\addmember.php">
                                             <div class="row">
-                                                <div class="col-12 ">
-                                                    <div class="form-group">
-                                                        <div class="col-md-6 col-12">
-                                                            <div class="form-group">
-                                                                <label for="Member_Name-column">ชื่อห้องประชุม</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 col-12">
-                                                            <div class="form-group">
-                                                                <label for="Username-column">จำนวนที่นั่ง</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <label for="Username-column">อุปกรณ์</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <label for="Username-column">รายละเอียดเพิ่มเติม</label>
-                                                            </div>
-                                                        </div>
 
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Member_Name-column">ชื่อ-นามสกุล</label>
+                                                        <input type="text" id="Member_Name-column" class="form-control" placeholder="ชื่อ-นามสกุล" name="Member_Name">
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Username-column">Username</label>
+                                                        <input type="text" id="Username-column" class="form-control" placeholder="Username" name="Username">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Password-column">Password</label>
+                                                        <input type="password" id="Password-column" class="form-control" name="Password" placeholder="Password">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>แผนก</label>
+                                                        <?php
+                                                        include '../connect.php';
+                                                        $sql = "SELECT * FROM Division ORDER BY Division_Name asc";
+                                                        $result = $conn->query($sql);
+                                                        ?>
+
+                                                        <select name="ID_Division" id="ID_Division" class="form-select"> ;
+                                                            <option selected>เลือก..</option>
+                                                            <?php foreach ($result as $results) { ?>
+                                                                <option value="<?php echo $results["ID_Division"]; ?>">
+                                                                    <?php echo $results["Division_Name"]; ?>
+                                                                </option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Job_title-column">ตำแหน่งงาน</label>
+                                                        <input type="text" id="Job_title-column" class="form-control" name="Job_title" placeholder="ตำแหน่งงาน">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Responsibility-column">บทบาท</label>
+                                                        <select name="Responsibility" id="Responsibility" class="form-select">
+                                                            <option selected>เลือก..</option>
+                                                            <option value="Admin">Admin</option>
+                                                            <option value="User">User</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Member_Tel-column">เบอร์โทรศัพท์</label>
+                                                        <input type="text" id="Member_Tel-column" class="form-control" name="Member_Tel" placeholder="เบอร์โทรศัพท์">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="Address-column">ที่อยู่</label>
+                                                        <input type="text" id="Address-column" class="form-control" name="Address" placeholder="ที่อยู่">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 d-flex justify-content-end">
+                                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                                </div>
+
                                             </div>
                                         </form>
                                     </div>

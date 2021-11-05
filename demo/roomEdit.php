@@ -145,32 +145,77 @@ session_start();
                             <section class="section">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form class="form" method="post" action="demo\backend\#">
+                                        <form class="form" method="post" action="#">
                                             <div class="row">
-                                                <div class="col-12 ">
-                                                    <div class="form-group">
-                                                        <div class="col-md-6 col-12">
-                                                            <div class="form-group">
-                                                                <label for="Member_Name-column">ชื่อห้องประชุม</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 col-12">
-                                                            <div class="form-group">
-                                                                <label for="Username-column">จำนวนที่นั่ง</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <label for="Username-column">อุปกรณ์</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <label for="Username-column">รายละเอียดเพิ่มเติม</label>
-                                                            </div>
-                                                        </div>
 
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Member_Name-column">ชื่อห้องประชุม</label>
+                                                        <input type="text" id="Member_Name-column" class="form-control" placeholder="ชื่อห้องประชุม" name="Member_Name">
                                                     </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Username-column">จำนวนที่นั่ง</label>
+                                                        <input type="text" id="Username-column" class="form-control" placeholder="จำนวนที่นั่ง" name="city-column">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="Password-column">อุปกรณ์</label>
+                                                    </div>
+                                                    <!-- เดี๋ยวแก้เป็นดึงข้อมูลมาจาก db ให้เป็น checkbox -->
+                                                    <li class="d-inline-block me-2 mb-1">
+                                                        <div class="form-check">
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" id="checkbox1" class="form-check-input">
+                                                                <label for="checkbox1">โปรเจคเตอร์</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-inline-block me-2 mb-1">
+                                                        <div class="form-check">
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" class="form-check-input" id="checkbox2">
+                                                                <label for="checkbox2">โทรทัศน์</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-inline-block me-2 mb-1">
+                                                        <div class="form-check">
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" class="form-check-input" id="checkbox2">
+                                                                <label for="checkbox2">กระดานไวท์บอร์ด</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-inline-block me-2 mb-1">
+                                                        <div class="form-check">
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" class="form-check-input" id="checkbox2">
+                                                                <label for="checkbox2">ไมค์-ลำโพง</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="d-inline-block me-2 mb-1">
+                                                        <div class="form-check">
+                                                            <div class="checkbox">
+                                                                <input type="checkbox" class="form-check-input" id="checkbox2">
+                                                                <label for="checkbox2">คอมพิวเตอร์</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="Username-column">รายละเอียดเพิ่มเติม</label>
+                                                        <input type="text" id="Username-column" class="form-control" placeholder="รายละเอียดเพิ่มเติม" name="city-column">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 d-flex justify-content-end">
+
+                                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">บันทึก</button>
                                                 </div>
                                             </div>
                                         </form>

@@ -38,7 +38,7 @@ include '../connect.php';
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                            <img src="../demo/assets/images/logo/logo2.png" alt="Logo">
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -50,62 +50,81 @@ include '../connect.php';
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="index.php" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  has-sub">
-                            <a href="form-layout.html" class='sidebar-link'>
+                            <a class='sidebar-link'>
                                 <i class="bi bi-file-earmark-medical-fill"></i>
                                 <span>ข้อมูลผู้ใช้</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="component-alert.html">ข้อมูลผู้ใช้ทั้งหมด</a>
+                                    <a href="memberlist.php">ข้อมูลผู้ใช้ทั้งหมด</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-badge.html">เพิ่มข้อมูลผู้ใช้</a>
+                                    <a href="memberRigister.php">เพิ่มข้อมูลผู้ใช้</a>
                                 </li>
+
                             </ul>
                         </li>
 
                         <li class="sidebar-item  has-sub">
-                            <a href="index.html" class='sidebar-link'>
+                            <a class='sidebar-link'>
                                 <i class="bi bi-easel-fill"></i>
                                 <span>จัดการห้องประชุม</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="component-alert.html">ข้อมูลห้องประชุมทั้งหมด</a>
+                                    <a href="roomList.php">ข้อมูลห้องประชุมทั้งหมด</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-badge.html">เพิ่มข้อมูลห้องประชุม</a>
+                                    <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
                             </ul>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-credit-card"></i>
-                                <span>ข้อมูลการจอง</span>
+                            <a href="book_room.php" class='sidebar-link'>
+                                <i class="bi bi-display"></i>
+                                <span>จองห้องประชุม</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="book_detail.php" class='sidebar-link'>
+                                <i class="bi bi-credit-card"></i>
+                                <span>ข้อมูลการจองของฉัน</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="book_user.php" class='sidebar-link'>
+                                <i class="bi bi-credit-card-2-back-fill"></i>
+                                <span>ข้อมูลการจองของผู้ใช้งาน</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  ">
+                            <a href="statistics.php" class='sidebar-link'>
                                 <i class="bi bi-collection-fill"></i>
                                 <span>รายงานสถิติประจำเดือน</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="personaldetail.php" class='sidebar-link'>
                                 <i class="bi bi-person-square"></i>
                                 <span>ข้อมูลส่วนตัว</span>
                             </a>
                         </li>
-
+                        <li class="sidebar-item  ">
+                            <a href="../index.html" class='sidebar-link'>
+                                <i class="bi bi-power"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
@@ -144,7 +163,8 @@ include '../connect.php';
                                 </thead>
                                 <?php
                                 if (!isset($_GET['action'])) {
-                                    $meSQL = "SELECT * FROM member ORDER BY ID_Member asc";
+                                    $meSQL = "SELECT * FROM member INNER JOIN Division ON Member.ID_Division = Division.ID_Division 
+                                    ORDER BY ID_Member asc";
                                     $meQuery = $conn->query($meSQL);
                                 ?>
                                     <tbody>
@@ -157,12 +177,12 @@ include '../connect.php';
                                                 <td><?php echo $rs['ID_Member'] ?></td>
                                                 <td> <?php echo $rs['Username'] ?> </td>
                                                 <td><?php echo $rs['Member_Name'] ?></td>
-                                                <td>ยังไม่ได้เชื่อม</td>
+                                                <td><?php echo $rs['Responsibility'] ?></td>
                                                 <td>
-                                                    <a href="#" class="btn-sm btn-success">แสดง</a>
+                                                    <a href="memberShow.php" class="btn-sm btn-success">แสดง</a>
                                                 </td>
                                                 <td>
-                                                    <a href="#" class="btn-sm btn-warning">แก้ไข</a>
+                                                    <a href="memberEdit.php" class="btn-sm btn-warning">แก้ไข</a>
                                                 </td>
                                                 <td>
                                                     <a href="#" class="btn-sm btn-danger">ลบ</a>

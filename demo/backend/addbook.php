@@ -1,0 +1,38 @@
+<?php
+session_start();
+//Connect MSSQL
+$serverName = 'localhost';
+$userName = 'sa';
+$userPassword = 'Hunterman1328!';
+$dbName = 'meetings_room';
+
+$conn = new PDO("sqlsrv:server=$serverName ; Database = $dbName", $userName, $userPassword);
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//---------------------------------------------------------------------------------------------------------------------------------
+if (!empty($_POST)) {
+    $room = $_POST['ID_Room'];
+    $seat = $_POST['contact'];
+    //$user = $_SESSION["login_id"];
+    $result = $conn->query(" SELECT Num_Seat FROM Room WHERE  ID_Room = '$room' ")->fetchColumn();
+
+    if ($seat > $result) {
+        echo 'ขอโทษนะครับ!!! จองที่นั่งเยอะเกินไปนะครับ ห้องนี้มีแค่ ' . $result . " ที่นั่ง";
+    } else {
+        $stm = $conn->prepare("INSERT INTO Booked (Num_User,Event_Start,Event_End,ID_Room,ID_Member) 
+            VALUES (:seat,:datetime,:datetime2,:ID_Room,:ID_Member)");
+
+        $stm->bindParam("seat", $_POST['contact']);
+        $stm->bindParam("datetime", $_POST["datetime"]);
+        $stm->bindParam("datetime2", $_POST["datetime2"]);
+        $stm->bindParam("ID_Room", $_POST['ID_Room']);
+        $stm->bindParam("ID_Member", $_SESSION["login_id"]);
+        $stm->execute();
+        if ($stm->rowCount()) {
+            echo "Record add successfully";
+        } else {
+            echo "Record add Faill";
+            //header("Location:http://localhost/meetingroom/demo/memberRigister.php");
+        }
+        $conn = null;
+    }
+}

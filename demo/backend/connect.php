@@ -3,7 +3,7 @@
 $serverName = 'localhost';
 $userName = 'sa';
 $userPassword = 'Hunterman1328!';
-$dbName = 'meetingroom';
+$dbName = 'meetings_room';
 
 try {
      $conn = new PDO("sqlsrv:server=$serverName ; Database = $dbName", $userName, $userPassword);

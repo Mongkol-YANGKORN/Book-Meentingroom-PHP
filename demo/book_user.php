@@ -42,13 +42,13 @@ include '../connect.php';
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="../index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                            <img src="../demo/assets/images/logo/logo2.png" alt="Logo">
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                         </div>
                     </div>
-                </div>l;
+                </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
@@ -72,40 +72,41 @@ include '../connect.php';
                                 <li class="submenu-item ">
                                     <a href="memberRigister.php">เพิ่มข้อมูลผู้ใช้</a>
                                 </li>
+
                             </ul>
                         </li>
 
                         <li class="sidebar-item  has-sub">
-                            <a href="index.html" class='sidebar-link'>
+                            <a class='sidebar-link'>
                                 <i class="bi bi-easel-fill"></i>
                                 <span>จัดการห้องประชุม</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="component-alert.html">ข้อมูลห้องประชุมทั้งหมด</a>
+                                    <a href="roomList.php">ข้อมูลห้องประชุมทั้งหมด</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-badge.html">เพิ่มข้อมูลห้องประชุม</a>
+                                    <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
                             </ul>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="book_room.php" class='sidebar-link'>
                                 <i class="bi bi-display"></i>
                                 <span>จองห้องประชุม</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="book_detail.php" class='sidebar-link'>
                                 <i class="bi bi-credit-card"></i>
                                 <span>ข้อมูลการจองของฉัน</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
                             <a href="book_user.php" class='sidebar-link'>
-                                <i class="bi bi-credit-card"></i>
+                                <i class="bi bi-credit-card-2-back-fill"></i>
                                 <span>ข้อมูลการจองของผู้ใช้งาน</span>
                             </a>
                         </li>
@@ -128,7 +129,6 @@ include '../connect.php';
                                 <span>Logout</span>
                             </a>
                         </li>
-
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
@@ -139,7 +139,6 @@ include '../connect.php';
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
-
 
 
             <section id="multiple-column-form">
@@ -207,7 +206,8 @@ include '../connect.php';
                                             </thead>
                                             <?php
                                             if (!isset($_GET['action'])) {
-                                                $meSQL = "SELECT * FROM Booked ";
+                                                $meSQL = "SELECT * FROM Booked INNER Join Member ON Booked.ID_Member = Member.ID_Member 
+                                                INNER JOIN dbo.Room ON Room.ID_Room = Booked.ID_Room ";
                                                 $meQuery = $conn->query($meSQL);
                                             ?>
                                                 <tbody>
@@ -218,12 +218,16 @@ include '../connect.php';
                                                         <tr>
 
                                                             <td> <?php echo $i++ ?> </td>
-                                                            <td> <?php //echo $rs['Room_Name'] 
+                                                            <td> <?php echo $rs['Room_Name']
                                                                     ?></td>
                                                             <td><?php echo $rs['Event_Start'] ?></td>
-                                                            <td><?php //echo $rs['Num_Seat'] 
+                                                            <td><?php if (empty($rs['Room_Description'])) {
+                                                                    echo ".";
+                                                                } else {
+                                                                    echo $rs['Room_Description'];
+                                                                }
                                                                 ?></td>
-                                                            <td>รอลูกแพะมาทำ</td>
+                                                            <td><?php echo $rs['Member_Name'] ?></td>
                                                             <td>
                                                                 <a href="#" class="btn-sm btn-success">แสดง</a>
                                                             </td>

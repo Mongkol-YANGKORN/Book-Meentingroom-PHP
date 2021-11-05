@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include '../connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room</title>
+    <title>ข้อมูลส่วนตัว</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -38,86 +38,40 @@ session_start();
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <img src="../demo/assets/images/logo/logo2.png" alt="Logo">
+                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                         </div>
                     </div>
-                </div>
+                </div>l;
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.php" class='sidebar-link'>
+                            <a href="user_dashboard.php" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item  has-sub">
-                            <a class='sidebar-link'>
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>ข้อมูลผู้ใช้</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="memberlist.php">ข้อมูลผู้ใช้ทั้งหมด</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="memberRigister.php">เพิ่มข้อมูลผู้ใช้</a>
-                                </li>
-
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a class='sidebar-link'>
-                                <i class="bi bi-easel-fill"></i>
-                                <span>จัดการห้องประชุม</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="roomList.php">ข้อมูลห้องประชุมทั้งหมด</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="roomAddEquipment.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
-                                </li>
-                            </ul>
-                        </li>
-
                         <li class="sidebar-item  ">
-                            <a href="book_room.php" class='sidebar-link'>
+                            <a href="user_bookroom.php" class='sidebar-link'>
                                 <i class="bi bi-display"></i>
                                 <span>จองห้องประชุม</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="book_detail.php" class='sidebar-link'>
+                            <a href="user_booklist.php" class='sidebar-link'>
                                 <i class="bi bi-credit-card"></i>
-                                <span>ข้อมูลการจองของฉัน</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="book_user.php" class='sidebar-link'>
-                                <i class="bi bi-credit-card-2-back-fill"></i>
-                                <span>ข้อมูลการจองของผู้ใช้งาน</span>
+                                <span>ข้อมูลการจอง</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="statistics.php" class='sidebar-link'>
-                                <i class="bi bi-collection-fill"></i>
-                                <span>รายงานสถิติประจำเดือน</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="personaldetail.php" class='sidebar-link'>
+                            <a href="user_personaldetail.php" class='sidebar-link'>
                                 <i class="bi bi-person-square"></i>
                                 <span>ข้อมูลส่วนตัว</span>
                             </a>
@@ -138,52 +92,79 @@ session_start();
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
-
-
-
             <section id="multiple-column-form">
                 <div class="row match-height">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">เพิ่มห้องประชุม</h4>
+                                <h4 class="card-title">ข้อมูลการจองห้องประชุม</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="backend\addroom.php">
+                                    <?php
+                                    if (!isset($_GET['action'])) {
+                                        $meSQL = "SELECT * FROM room";
+                                        $meQuery = $conn->query($meSQL);
+                                    ?>
+
                                         <div class="row">
 
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <label for="Member_Name-column">ชื่อห้องประชุม</label>
-                                                    <input type="text" id="Member_Name-column" class="form-control" placeholder="ชื่อห้องประชุม" name="Room_Name">
+                                                    <label for="ID_Member-column">ชื่อห้อง</label>
+                                                    <br>
+                                                    <label></label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <label for="Username-column">จำนวนที่นั่ง</label>
-                                                    <input type="text" id="Username-column" class="form-control" placeholder="จำนวนที่นั่ง" name="Num_seat">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label for="Username-column">รายละเอียดเพิ่มเติม</label>
-                                                    <input type="text" id="Username-column" class="form-control" placeholder="รายละเอียดเพิ่มเติม" name="Room_Dscription">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 d-flex justify-content-end">
+                                                    <label for="Member_Name-column">จำนวนผู้เข้าประชุม</label>
 
-                                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                                <button type="submit" class="btn btn-primary me-1 mb-1">บันทึก</button>
+                                                </div>
                                             </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="Username-column">ชื่อผู้จอง</label>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="Password-column">เบอร์โทรศัทพ์</label>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label>เวลาเริ่มต้น</label>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="Job_title-column">เวลาสิ้นสุด</label>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12 d-flex justify-content-end">
+                                                <button href="user_editpersonldetail.php" class="btn-sm btn-warning me-1 mb-1">แก้ไข</button>
+                                                <button type="" class="btn-sm btn-danger me-1 mb-1">ยกเลิก</button>
+                                            </div>
+
                                         </div>
-                                    </form>
+
+                                    <?php } ?>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
 
         </div>
 

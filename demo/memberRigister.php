@@ -38,78 +38,93 @@ session_start();
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                            <img src="../demo/assets/images/logo/logo2.png" alt="Logo">
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                         </div>
                     </div>
-                </div>l;
+                </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="index.php" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  has-sub">
-                            <a href="form-layout.html" class='sidebar-link'>
+                            <a class='sidebar-link'>
                                 <i class="bi bi-file-earmark-medical-fill"></i>
                                 <span>ข้อมูลผู้ใช้</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="component-alert.html">ข้อมูลผู้ใช้ทั้งหมด</a>
+                                    <a href="memberlist.php">ข้อมูลผู้ใช้ทั้งหมด</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-badge.html">เพิ่มข้อมูลผู้ใช้</a>
+                                    <a href="memberRigister.php">เพิ่มข้อมูลผู้ใช้</a>
                                 </li>
+
                             </ul>
                         </li>
 
                         <li class="sidebar-item  has-sub">
-                            <a href="index.html" class='sidebar-link'>
+                            <a class='sidebar-link'>
                                 <i class="bi bi-easel-fill"></i>
                                 <span>จัดการห้องประชุม</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="component-alert.html">ข้อมูลห้องประชุมทั้งหมด</a>
+                                    <a href="roomList.php">ข้อมูลห้องประชุมทั้งหมด</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-badge.html">เพิ่มข้อมูลห้องประชุม</a>
+                                    <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
                             </ul>
                         </li>
+
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="book_room.php" class='sidebar-link'>
                                 <i class="bi bi-display"></i>
                                 <span>จองห้องประชุม</span>
                             </a>
                         </li>
+
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="book_detail.php" class='sidebar-link'>
                                 <i class="bi bi-credit-card"></i>
-                                <span>ข้อมูลการจอง</span>
+                                <span>ข้อมูลการจองของฉัน</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="book_user.php" class='sidebar-link'>
+                                <i class="bi bi-credit-card-2-back-fill"></i>
+                                <span>ข้อมูลการจองของผู้ใช้งาน</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  ">
+                            <a href="statistics.php" class='sidebar-link'>
                                 <i class="bi bi-collection-fill"></i>
                                 <span>รายงานสถิติประจำเดือน</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="personaldetail.php" class='sidebar-link'>
                                 <i class="bi bi-person-square"></i>
                                 <span>ข้อมูลส่วนตัว</span>
                             </a>
                         </li>
-
+                        <li class="sidebar-item  ">
+                            <a href="../index.html" class='sidebar-link'>
+                                <i class="bi bi-power"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
@@ -132,14 +147,9 @@ session_start();
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="\backend\addmember.php">
+                                    <form class="form" method="post" action="backend\addmember.php">
                                         <div class="row">
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="ID_Member-column">รหัสผู้ใช้งาน</label>
-                                                    <input type="text" id="ID_Member-column" class="form-control" placeholder="รหัสผู้ใช้งาน" name="ID_Member">
-                                                </div>
-                                            </div>
+
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="Member_Name-column">ชื่อ-นามสกุล</label>
@@ -149,31 +159,25 @@ session_start();
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="Username-column">Username</label>
-                                                    <input type="text" id="Username-column" class="form-control" placeholder="Username" name="city-column">
+                                                    <input type="text" id="Username-column" class="form-control" placeholder="Username" name="Username">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="Password-column">Password</label>
-                                                    <input type="password" id="Password-column" class="form-control" name="Username" placeholder="Password">
+                                                    <input type="password" id="Password-column" class="form-control" name="Password" placeholder="Password">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label>แผนก</label>
-                                                    <?php
-                                                    include '../connect.php';
-                                                    $sql = "SELECT * FROM Division ORDER BY Division_Name asc";
-                                                    $result = $conn->query($sql);
-                                                    ?>
-
-                                                    <select name="ID_Division" id="ID_Division" class="form-select"> ;
+                                                    <select name="Division_name" id="Division_name" class="form-select">
                                                         <option selected>เลือก..</option>
-                                                        <?php foreach ($result as $results) { ?>
-                                                            <option value="<?php echo $results["ID_Division"]; ?>">
-                                                                <?php echo $results["Division_Name"]; ?>
-                                                            </option>
-                                                        <?php } ?>
+                                                        <option value="Accouting">Accouting</option>
+                                                        <option value="Developers">Developers</option>
+                                                        <option value="HumanResource">Human Resource</option>
+                                                        <option value="Marketing">Marketing</option>
+
                                                     </select>
                                                 </div>
                                             </div>
