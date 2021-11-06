@@ -84,6 +84,9 @@ include '../connect.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
+                                <li class="submenu-item ">
+                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -155,7 +158,7 @@ include '../connect.php';
                                                     <th>รหัสห้อง</th>
                                                     <th>ชื่อห้อง</th>
                                                     <th>จำนวนที่นั่ง</th>
-                                                    <th>สิ่งอำนวยความสะดวก</th>
+
                                                     <th>รายละเอียดเพิ่มเติม</th>
                                                     <th>แสดง</th>
                                                     <th>เพิ่ม/แก้ไขอุปกรณ์</th>
@@ -165,8 +168,7 @@ include '../connect.php';
                                             </thead>
                                             <?php
                                             if (!isset($_GET['action'])) {
-                                                $meSQL = ("SELECT * from Room INNER JOIN dbo.Room_Detail ON Room.ID_Room = Room_Detail.ID_Room 
-                                                inner join dbo.Equipment on Equipment.ID_Equipment = Room_Detail.ID_Equipment ORDER BY dbo.Room.ID_Room asc");
+                                                $meSQL = ("SELECT * from Room  ORDER BY dbo.Room.ID_Room asc");
                                                 $meQuery = $conn->query($meSQL);
 
                                             ?>
@@ -178,27 +180,22 @@ include '../connect.php';
                                                         <tr>
 
                                                             <td> <?php echo $i++ ?> </td>
-
                                                             <td><?php echo $rs['ID_Room'] ?></td>
                                                             <td><?php echo $rs['Room_Name'] ?></td>
                                                             <td><?php echo $rs['Num_Seat'] ?></td>
-                                                            <td><?php echo $rs['Equipment_Name'] ?></td>
                                                             <td><?php echo $rs['Room_Dscription'] ?></td>
 
                                                             <!-- link เข้าแต่ละหน้า -->
                                                             <td>
-                                                                <a href="roomShow.php" class="btn-sm btn-success">แสดง</a>
+                                                                <a href="roomShow.php?ID_Room=<?php echo $rs["ID_Room"]; ?>" class="btn-sm btn-success">แสดง</a>
                                                             </td>
                                                             <td>
 
-                                                                <a href="roomAddEquipment.php" class="btn-sm btn-info">เพิ่ม/แก้ไขอุปกรณ์</a>
+                                                                <a href="roomAddEquipment.php?ID_Room=<?php echo $rs["ID_Room"]; ?>" class="btn-sm btn-info">เพิ่ม/แก้ไขอุปกรณ์</a>
                                                             </td>
                                                             <td>
-                                                                <?php //ยังไม่เสร็จ
-                                                                echo "<a href='roomEdit.php?ID_Room=$rs[0]' class='btn-sm btn-warning' >แก้ไขห้องประชุม</a>";
-                                                                ?>
-                                                                <!--a href="roomEdit.php?ID_Room=<?php //echo $result["ID_Room"]; 
-                                                                                                    ?>" class="btn-sm btn-warning">แก้ไขห้องประชุม</-a> -->
+
+                                                                <a href='roomEdit.php?ID_Room=<?php echo $rs["ID_Room"]; ?>' class='btn-sm btn-warning'>แก้ไขห้องประชุม</a>
                                                             </td>
                                                             <td>
                                                                 <a href="#" class="btn-sm btn-danger">ลบ</a>

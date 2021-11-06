@@ -11,28 +11,27 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //---------------------------------------------------------------------------------------------------------------------------------
 if (!empty($_POST)) {
     $room = $_POST['ID_Room'];
-    $seat = $_POST['contact'];
     $datestart = $_POST["datetime"];
     $dateend = $_POST["datetime2"];
-    //$user = $_SESSION["login_id"];
-    $result = $conn->query(" SELECT Num_Seat FROM Room WHERE  ID_Room = '$room' ")->fetchColumn();
+    $seat = $_POST["Num_seat"];
     $checkdate = $conn->query(" SELECT * from Booked where Booked.Event_Start = Convert(DATETIME ,'$datestart') 
     and Booked.Event_End = Convert(DATETIME ,'$dateend ')And ID_Room = ('$room')  ")->fetchColumn();
+    $result = $conn->query(" SELECT Num_Seat FROM Room WHERE  ID_Room = '$room' ")->fetchColumn();
     if ($checkdate > 0) {
         echo 'ขอโทษนะครับ!!! คิวเวลานี้ถูกจองไว้แล้วนะครับ';
-        header("Location:http://localhost/meetingroom/demo/book_room.php");
+        //echo $room;
     } else if ($seat > $result) {
         echo 'ขอโทษนะครับ!!! จองที่นั่งเยอะเกินไปนะครับ ห้องนี้มีแค่ ' . $result . " ที่นั่ง";
-        header("Location:http://localhost/meetingroom/demo/book_room.php");
     } else {
-        $stm = $conn->prepare("INSERT INTO Booked (Num_User,Event_Start,Event_End,ID_Room,ID_Member) 
-            VALUES (:seat,:datetime,:datetime2,:ID_Room,:ID_Member)");
 
-        $stm->bindParam("seat", $_POST['contact']);
+        $stm = $conn->prepare("UPDATE Booked SET Num_User = :Num_User, Event_Start = :datetime, Event_End = :datetime2 
+        ,ID_Room = :ID_Room ,ID_Member = :ID_Member WHERE ID_Booked = :ID_Booked");
         $stm->bindParam("datetime", $_POST["datetime"]);
         $stm->bindParam("datetime2", $_POST["datetime2"]);
         $stm->bindParam("ID_Room", $_POST['ID_Room']);
+        $stm->bindParam("Num_User", $_POST["Num_seat"]);
         $stm->bindParam("ID_Member", $_SESSION["login_id"]);
+        $stm->bindParam("ID_Booked", $_POST["ID_Booked"]);
         $stm->execute();
         if ($stm->rowCount()) {
             echo "Record add successfully";
@@ -40,6 +39,6 @@ if (!empty($_POST)) {
             echo "Record add Faill";
             //header("Location:http://localhost/meetingroom/demo/memberRigister.php");
         }
-        $conn = null;
     }
+    $conn = null;
 }

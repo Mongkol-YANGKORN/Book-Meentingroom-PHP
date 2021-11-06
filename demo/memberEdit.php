@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+include '../connect.php';
+$user = $_GET['ID_Member'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,6 +85,9 @@ session_start();
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
+                                <li class="submenu-item ">
+                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -145,9 +149,35 @@ session_start();
                             <section class="section">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form class="form" method="post" action="backend\addmember.php">
+                                        <form class="form" method="post" action="backend\membereditdata.php">
                                             <div class="row">
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Member_Name-column">รหัสสมาชิก</label>
+                                                        <?php
+                                                        include '../connect.php';
+                                                        if (isset($_GET['ID_Member'])) {
 
+                                                            $meSQL = "SELECT * FROM member INNER JOIN Division ON Member.ID_Division = Division.ID_Division 
+                                                                            where ID_Member ='$user'";
+                                                            $meQuery = $conn->query($meSQL);
+                                                        ?>
+                                                            <?php
+                                                            $i = 1;
+                                                            while ($rs = $meQuery->fetch(PDO::FETCH_ASSOC)) {
+                                                            ?>
+                                                                <div class="form-group">
+                                                                    <label for="Member_Name-column"> <?php echo $rs["ID_Member"]; ?> </label>
+                                                                    <input type="hidden" name="ID_Member" value="<?php echo $rs["ID_Member"]; ?>" />
+
+                                                                </div>
+
+                                                    </div>
+                                                <?php
+                                                            } ?>
+                                            <?php
+                                                        } ?>
+                                                </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="Member_Name-column">ชื่อ-นามสกุล</label>

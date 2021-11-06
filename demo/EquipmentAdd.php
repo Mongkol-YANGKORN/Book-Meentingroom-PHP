@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../connect.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,10 +29,6 @@ include '../connect.php';
             font-family: "Prompt", sans-serif;
         }
     </style>
-    <!-- datetime -->
-    <link rel="stylesheet" href="js/jquery.datetimepicker.min.css">
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery.datetimepicker.full.js"></script>
 </head>
 
 <body>
@@ -144,110 +140,52 @@ include '../connect.php';
             </header>
 
 
+
             <section id="multiple-column-form">
                 <div class="row match-height">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">ข้อมูลการจองของผู้ใช้งาน</h4>
+                                <h4 class="card-title">เพิ่มอุปกรณ์ห้องประชุม</h4>
                             </div>
-                            <section class="section">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <form class="form" method="post" action="demo\backend\#">
-                                            <div class="row">
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label>ห้องประชุม</label>
-                                                        <?php
-                                                        include '../connect.php';
-                                                        $sql = "SELECT * FROM Room ORDER BY Room_Name asc";
-                                                        $result = $conn->query($sql);
-                                                        ?>
-                                                        <select name="ID_Room" id="ID_Room" class="form-select"> ;
-                                                            <option selected>เลือก..</option>
-                                                            <?php foreach ($result as $results) { ?>
-                                                                <option value="<?php echo $results["ID_Room"]; ?>">
-                                                                    <?php echo $results["Room_Name"]; ?>
-                                                                </option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group has-icon-left">
-                                                        <label for="ID_Member-column">วันที่จอง</label>
-                                                        <div class="position-relative">
-                                                            <input id="datetime" class="form-control" placeholder="เลือกวันที่จอง" />
-                                                            <script>
-                                                                $("#datetime").datetimepicker({
-                                                                    step: 15
-                                                                });
-                                                            </script>
-                                                            <div class="form-control-icon">
-                                                                <i class="bi bi-clock"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 d-flex justify-content-end">
-                                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                                        <button type="submit" class="btn btn-primary me-1 mb-1">ค้นหา</button>
-                                                    </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <form class="form" method="post" action="backend\addroom.php">
+                                        <div class="row">
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="Type_Name-column">ประเภทอุปกรณ์</label>
+                                                    <input type="text" id="Type_Name-column" class="form-control" placeholder="ประเภทอุปกรณ์" name="Type_Name">
                                                 </div>
                                             </div>
-                                        </form>
-                                        <table class="table table-striped" id="table1">
-                                            <thead>
-                                                <tr>
-                                                    <th>ลำดับ</th>
-                                                    <th>ห้องประชุม</th>
-                                                    <th>วัน-เวลา</th>
-                                                    <th>หัวข้อการประชุม</th>
-                                                    <th>ชื่อผู้จอง</th>
-                                                    <th>แสดง</th>
-                                                </tr>
-                                            </thead>
-                                            <?php
-                                            if (!isset($_GET['action'])) {
-                                                $meSQL = "SELECT * FROM Booked INNER Join Member ON Booked.ID_Member = Member.ID_Member 
-                                                INNER JOIN dbo.Room ON Room.ID_Room = Booked.ID_Room ";
-                                                $meQuery = $conn->query($meSQL);
-                                            ?>
-                                                <tbody>
-                                                    <?php
-                                                    $i = 1;
-                                                    while ($rs = $meQuery->fetch(PDO::FETCH_ASSOC)) {
-                                                    ?>
-                                                        <tr>
 
-                                                            <td> <?php echo $i++ ?> </td>
-                                                            <td> <?php echo $rs['Room_Name']
-                                                                    ?></td>
-                                                            <td><?php echo $rs['Event_Start'] ?></td>
-                                                            <td><?php if (empty($rs['Room_Description'])) {
-                                                                    echo ".";
-                                                                } else {
-                                                                    echo $rs['Room_Description'];
-                                                                }
-                                                                ?></td>
-                                                            <td><?php echo $rs['Member_Name'] ?></td>
-                                                            <td>
-                                                                <a href="#" class="btn-sm btn-success">แสดง</a>
-                                                            </td>
-                                                        </tr>
-                                                    <?php } ?>
-                                                </tbody>
-                                            <?php } ?>
-                                        </table>
-                                    </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="Equipment_Name-column">ชื่ออุปกรณ์</label>
+                                                    <input type="text" id="Equipment_Name-column" class="form-control" placeholder="ชื่ออุปกรณ์" name="Equipment_Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="Num_Equipment-column">จำนวนอุปกรณ์</label>
+                                                    <input type="number" id="Num_Equipment-column" class="form-control" placeholder="จำนวนอุปกรณ์" name="Num_Equipment">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 d-flex justify-content-end">
+                                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                <button type="submit" class="btn btn-primary me-1 mb-1">บันทึก</button>
+                                            </div>
+                                        </div>
                                 </div>
-                            </section>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
-
         </div>
+        </section>
+
+    </div>
 
     </div>
     </div>

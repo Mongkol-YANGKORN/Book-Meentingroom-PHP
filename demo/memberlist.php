@@ -84,6 +84,9 @@ include '../connect.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
+                                <li class="submenu-item ">
+                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -152,8 +155,9 @@ include '../connect.php';
                                 <thead>
                                     <tr>
                                         <th>ลำดับ</th>
+                                        <th>ID</th>
                                         <th>Username</th>
-                                        <th>รหัสผู้ใช้งาน</th>
+
                                         <th>ชื่อ-นามสกุล</th>
                                         <th>บทบาท</th>
                                         <th>แสดง</th>
@@ -182,7 +186,7 @@ include '../connect.php';
                                                     <a href="memberShow.php" class="btn-sm btn-success">แสดง</a>
                                                 </td>
                                                 <td>
-                                                    <a href="memberEdit.php" class="btn-sm btn-warning">แก้ไข</a>
+                                                    <a href="memberEdit.php?ID_Member=<?php echo $rs["ID_Member"]; ?>" class="btn-sm btn-warning">แก้ไข</a>
                                                 </td>
                                                 <td>
                                                     <a href="#" class="btn-sm btn-danger">ลบ</a>

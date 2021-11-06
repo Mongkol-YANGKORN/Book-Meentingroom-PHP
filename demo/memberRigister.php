@@ -84,6 +84,9 @@ session_start();
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
+                                <li class="submenu-item ">
+                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
+                                </li>
                             </ul>
                         </li>
 

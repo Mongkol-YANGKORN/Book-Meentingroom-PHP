@@ -86,6 +86,9 @@ include '../connect.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
+                                <li class="submenu-item ">
+                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -188,12 +191,7 @@ include '../connect.php';
                                                     <input type="text" id="Job_title-column" class="form-control" name="Job_title" placeholder="เบอร์โทรศัพท์">
                                                 </div>
                                             </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label for="Address-column">หัวข้อการประชุม</label>
-                                                    <input type="text" id="Address-column" class="form-control" name="Address" placeholder="หัวข้อการประชุม">
-                                                </div>
-                                            </div>
+
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group has-icon-left">
                                                     <label for="ID_Member-column">เวลาเริ่มต้น</label>

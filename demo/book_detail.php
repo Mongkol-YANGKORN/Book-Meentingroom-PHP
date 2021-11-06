@@ -88,6 +88,9 @@ include '../connect.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
+                                <li class="submenu-item ">
+                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -232,7 +235,7 @@ include '../connect.php';
                                                                 <a href="#" class="btn-sm btn-success">แสดง</a>
                                                             </td>
                                                             <td>
-                                                                <a href="#" class="btn-sm btn-warning">แก้ไข</a>
+                                                                <a href="book_roomEdit.php?ID_Booked=<?php echo $rs["ID_Booked"]; ?>" class="btn-sm btn-warning">แก้ไข</a>
                                                             </td>
                                                             <td>
                                                                 <a href="#" class="btn-sm btn-danger">ลบ</a>

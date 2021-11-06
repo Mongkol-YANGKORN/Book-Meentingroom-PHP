@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include '../connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room</title>
+    <title>ข้อมูลส่วนตัว</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -84,6 +84,9 @@ session_start();
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
+                                <li class="submenu-item ">
+                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -140,53 +143,75 @@ session_start();
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">แสดงข้อมูลห้องประชุม</h4>
+                                <h4 class="card-title">ข้อมูลห้อง</h4>
                             </div>
-                            <section class="section">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <form class="form" method="post" action="demo\backend\#">
-                                            <div class="row">
-                                                <div class="col-12 ">
-                                                    <div class="form-group">
-                                                        <div class="col-md-6 col-12">
-                                                            <div class="form-group">
-                                                                <label for="Member_Name-column">ชื่อห้องประชุม</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 col-12">
-                                                            <div class="form-group">
-                                                                <label for="Username-column">จำนวนที่นั่ง</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <label for="Username-column">อุปกรณ์</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <label for="Username-column">รายละเอียดเพิ่มเติม</label>
-                                                            </div>
-                                                        </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <?php
+                                    include '../connect.php';
+                                    if (isset($_GET['ID_Room'])) {
+                                        $room =  $_GET['ID_Room'];
 
-                                                    </div>
+                                        $meSQL = ("SELECT * from Room INNER JOIN dbo.Room_Detail ON Room.ID_Room = Room_Detail.ID_Room 
+                                        inner join dbo.Equipment on Equipment.ID_Equipment = Room_Detail.ID_Equipment Where dbo.Room.ID_Room = '$room'");
+                                        $meQuery = $conn->query($meSQL);
+
+                                    ?>
+                                        <?php
+                                        $i = 1;
+                                        $rs = $meQuery->fetch(PDO::FETCH_ASSOC)
+                                        ?>
+                                        <div class="row">
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="ID_Room-column">รหัสห้อง</label>
+                                                    <br>
+                                                    <label><?php echo $rs['ID_Room']; ?></label>
                                                 </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </section>
 
+                                                <div class="form-group">
+                                                    <label for="Num_Seat-column">จำนวนที่นั่ง</label>
+                                                    <br>
+                                                    <label><?php echo $rs['Num_Seat']; ?></label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Equipment_Name-column">ชื่ออุปกรณ์</label>
+                                                    <br>
+                                                    <label><?php
+                                                            $meSQL = ("SELECT * from Room INNER JOIN dbo.Room_Detail ON Room.ID_Room = Room_Detail.ID_Room 
+                                                                inner join dbo.Equipment on Equipment.ID_Equipment = Room_Detail.ID_Equipment Where dbo.Room.ID_Room = '$room'");
+                                                            $meQuery = $conn->query($meSQL);
+                                                            while ($rsd = $meQuery->fetch(PDO::FETCH_ASSOC)) {
+                                                                echo $rsd['Equipment_Name'] . ' ';
+                                                            }
+                                                            ?></label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Room_Dscription-column">รายละเอียดเพิ่มเติม</label>
+                                                    <br>
+                                                    <label><?php echo $rs['Room_Dscription']; ?></label>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+
         </div>
+
     </div>
     </div>
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+
     <script src="assets/js/main.js"></script>
 </body>
 

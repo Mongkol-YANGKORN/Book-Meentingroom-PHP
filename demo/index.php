@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../connect.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,6 +88,9 @@ include '../connect.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
+                                <li class="submenu-item ">
+                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -139,6 +143,8 @@ include '../connect.php';
                 </a>
             </header>
 
+
+
             <div class="page-heading">
                 <h3>Dashborad</h3>
             </div>
@@ -157,7 +163,17 @@ include '../connect.php';
                                             </div>
                                             <div class="col-md-8">
                                                 <h6 class="text-muted font-semibold">ผู้ใช้งานทั้งหมด</h6>
-                                                <h6 class="font-extrabold mb-0">112.000</h6>
+                                                <?php
+
+                                                if (!isset($_GET['action'])) {
+                                                    $meSQL = ("SELECT COUNT(ID_member) FROM member");
+                                                    $meQuery = $conn->query($meSQL);
+                                                    $count = $meQuery->fetchColumn();
+
+                                                ?>
+                                                    <h6 class="font-extrabold mb-0"> <?php echo $count  ?> คน</h6>
+                                                <?php
+                                                } ?>
                                             </div>
                                         </div>
                                     </div>
@@ -169,12 +185,27 @@ include '../connect.php';
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="stats-icon blue">
-                                                    <i class="iconly-boldProfile"></i>
+                                                    <i class="iconly-boldAdd-User"></i>
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
                                                 <h6 class="text-muted font-semibold">Admin</h6>
-                                                <h6 class="font-extrabold mb-0">183.000</h6>
+                                                <?php
+
+
+                                                if (!isset($_GET['action'])) {
+
+                                                    //รอแก้การjoinใหม่ 
+                                                    $meSQL = ("SELECT COUNT(Responsibility) FROM Division INNER Join Member 
+                                                 ON dbo.Division.ID_Division=dbo.Member.ID_Division where Responsibility Like 'Admin'");
+                                                    $meQuery = $conn->query($meSQL);
+                                                    $count = $meQuery->fetchColumn();
+
+                                                ?>
+                                                    <h6 class="font-extrabold mb-0"> <?php echo $count  ?> คน</h6>
+                                                <?php
+                                                }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -186,12 +217,22 @@ include '../connect.php';
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="stats-icon green">
-                                                    <i class="iconly-boldAdd-User"></i>
+                                                    <i class="iconly-boldProfile"></i>
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
                                                 <h6 class="text-muted font-semibold">User</h6>
-                                                <h6 class="font-extrabold mb-0">80.000</h6>
+                                                <?php
+
+                                                if (!isset($_GET['action'])) {
+                                                    $meSQL = ("SELECT COUNT(Responsibility) FROM Division WHERE Responsibility Like 'User'");
+                                                    $meQuery = $conn->query($meSQL);
+                                                    $count = $meQuery->fetchColumn();
+
+                                                ?>
+                                                    <h6 class="font-extrabold mb-0"> <?php echo $count  ?> คน</h6>
+                                                <?php
+                                                } ?>
                                             </div>
                                         </div>
                                     </div>
@@ -205,7 +246,8 @@ include '../connect.php';
                                         <h4>ปฏิทิน</h4>
                                     </div>
                                     <div class="card-body">
-                                        <div id="chart-profile-visit"></div>
+
+
                                     </div>
                                 </div>
                             </div>

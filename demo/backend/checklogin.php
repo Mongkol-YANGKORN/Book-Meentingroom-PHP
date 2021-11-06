@@ -33,7 +33,7 @@ if (!empty($_POST)) {
         if ($role = 'Admin') {
             header("Location:http://localhost/meetingroom/demo/index.php");
         } elseif ($role = 'User') {
-            header("Location:http://localhost/meetingroom/demo/user_booklist.php");
+            header("Location:http://localhost/meetingroom/demo/user_dashboard.php");
         } else {
             echo 'ไม่พบข้อมูลในระะบบ' . "</br>";
             echo $role;

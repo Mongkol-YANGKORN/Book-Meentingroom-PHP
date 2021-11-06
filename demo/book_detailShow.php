@@ -38,40 +38,86 @@ include '../connect.php';
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                            <img src="../demo/assets/images/logo/logo2.png" alt="Logo">
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                         </div>
                     </div>
-                </div>l;
+                </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item  ">
-                            <a href="user_dashboard.php" class='sidebar-link'>
+                            <a href="index.php" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
+                        <li class="sidebar-item  has-sub">
+                            <a class='sidebar-link'>
+                                <i class="bi bi-file-earmark-medical-fill"></i>
+                                <span>ข้อมูลผู้ใช้</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="memberlist.php">ข้อมูลผู้ใช้ทั้งหมด</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="memberRigister.php">เพิ่มข้อมูลผู้ใช้</a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item  has-sub">
+                            <a class='sidebar-link'>
+                                <i class="bi bi-easel-fill"></i>
+                                <span>จัดการห้องประชุม</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="roomList.php">ข้อมูลห้องประชุมทั้งหมด</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="sidebar-item  ">
-                            <a href="user_bookroom.php" class='sidebar-link'>
+                            <a href="book_room.php" class='sidebar-link'>
                                 <i class="bi bi-display"></i>
                                 <span>จองห้องประชุม</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="user_booklist.php" class='sidebar-link'>
+                            <a href="book_detail.php" class='sidebar-link'>
                                 <i class="bi bi-credit-card"></i>
-                                <span>ข้อมูลการจอง</span>
+                                <span>ข้อมูลการจองของฉัน</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="book_user.php" class='sidebar-link'>
+                                <i class="bi bi-credit-card-2-back-fill"></i>
+                                <span>ข้อมูลการจองของผู้ใช้งาน</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="user_personaldetail.php" class='sidebar-link'>
+                            <a href="statistics.php" class='sidebar-link'>
+                                <i class="bi bi-collection-fill"></i>
+                                <span>รายงานสถิติประจำเดือน</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="personaldetail.php" class='sidebar-link'>
                                 <i class="bi bi-person-square"></i>
                                 <span>ข้อมูลส่วนตัว</span>
                             </a>

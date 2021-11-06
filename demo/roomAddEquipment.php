@@ -84,6 +84,9 @@ session_start();
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
+                                <li class="submenu-item ">
+                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -147,51 +150,51 @@ session_start();
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <label for="Password-column">ห้องประชุม : </label>
+
                                     <form class="form" method="post" action="#">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <label for="Password-column">อุปกรณ์</label>
+                                                    <label>อุปกรณ์</label>
                                                 </div>
                                                 <!-- เดี๋ยวแก้เป็นดึงข้อมูลมาจาก db ให้เป็น checkbox -->
                                                 <li class="d-inline-block me-2 mb-1">
                                                     <div class="form-check">
                                                         <div class="checkbox">
-                                                            <input type="checkbox" id="checkbox1" class="form-check-input">
-                                                            <label for="checkbox1">โปรเจคเตอร์</label>
+                                                            <input type="checkbox" id="projector" class="form-check-input">
+                                                            <label for="projector">projector</label>
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <li class="d-inline-block me-2 mb-1">
                                                     <div class="form-check">
                                                         <div class="checkbox">
-                                                            <input type="checkbox" class="form-check-input" id="checkbox2">
-                                                            <label for="checkbox2">โทรทัศน์</label>
+                                                            <input type="checkbox" class="form-check-input" id="television">
+                                                            <label for="television">television</label>
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <li class="d-inline-block me-2 mb-1">
                                                     <div class="form-check">
                                                         <div class="checkbox">
-                                                            <input type="checkbox" class="form-check-input" id="checkbox2">
-                                                            <label for="checkbox2">กระดานไวท์บอร์ด</label>
+                                                            <input type="checkbox" class="form-check-input" id="whiteboard">
+                                                            <label for="whiteboard">white board</label>
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <li class="d-inline-block me-2 mb-1">
                                                     <div class="form-check">
                                                         <div class="checkbox">
-                                                            <input type="checkbox" class="form-check-input" id="checkbox2">
-                                                            <label for="checkbox2">ไมค์-ลำโพง</label>
+                                                            <input type="checkbox" class="form-check-input" id="mic-speaker">
+                                                            <label for="mic-speaker">mic-speaker</label>
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <li class="d-inline-block me-2 mb-1">
                                                     <div class="form-check">
                                                         <div class="checkbox">
-                                                            <input type="checkbox" class="form-check-input" id="checkbox2">
-                                                            <label for="checkbox2">คอมพิวเตอร์</label>
+                                                            <input type="checkbox" class="form-check-input" id="computer">
+                                                            <label for="computer">computer</label>
                                                         </div>
                                                     </div>
                                                 </li>

@@ -182,6 +182,9 @@ include '../connect.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
+                                <li class="submenu-item ">
+                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -248,6 +251,31 @@ include '../connect.php';
                                     <form class="form" method="post" action="demo\backend\#">
                                         <div class="row">
                                             <div class="col-md-6 col-12">
+
+                                                <label for="Member_Name-column">รหัสการจอง</label>
+                                                <?php
+                                                include '../connect.php';
+                                                if (isset($_GET['ID_Booked'])) {
+                                                    $book = $_GET['ID_Booked'];
+                                                    $meSQL = "SELECT * FROM Booked where ID_Booked ='$book'";
+                                                    $meQuery = $conn->query($meSQL);
+                                                ?>
+                                                    <?php
+                                                    $i = 1;
+                                                    $rs = $meQuery->fetch(PDO::FETCH_ASSOC)
+                                                    ?>
+                                                    <div class="form-group">
+                                                        <label for="Member_Name-column"> <?php echo $rs["ID_Booked"]; ?> </label>
+                                                        <input type="hidden" name="ID_Booked" value="<?php echo $rs["ID_Booked"] ?>" />
+
+                                                    </div>
+
+
+                                                <?php
+                                                } ?>
+
+                                            </div>
+                                            <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label>ห้องประชุม</label>
                                                     <?php
@@ -269,7 +297,7 @@ include '../connect.php';
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="contact-info-vertical">จำนวนผู้เข้าร่วม</label>
-                                                    <input type="number" id="contact-info-vertical" class="form-control" name="contact" placeholder="จำนวนผู้เข้าร่วม">
+                                                    <input type="number" id="contact-info-vertical" class="form-control" name="Num_seat" placeholder="จำนวนผู้เข้าร่วม">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
@@ -284,12 +312,7 @@ include '../connect.php';
                                                     <input type="text" id="Job_title-column" class="form-control" name="Job_title" placeholder="เบอร์โทรศัพท์">
                                                 </div>
                                             </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label for="Address-column">หัวข้อการประชุม</label>
-                                                    <input type="text" id="Address-column" class="form-control" name="Address" placeholder="หัวข้อการประชุม">
-                                                </div>
-                                            </div>
+
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group has-icon-left">
                                                     <label for="ID_Member-column">เวลาเริ่มต้น</label>
@@ -323,7 +346,7 @@ include '../connect.php';
                                                 </div>
                                             </div>
                                             <div class="col-12 d-flex justify-content-end">
-                                                <button type="" class="btn btn-info me-1 mb-1">ตรวจสอบห้องว่าง</button>
+                                                <a type="" class="btn btn-info me-1 mb-1">ตรวจสอบห้องว่าง</a>
                                                 <button type="reset" class="btn btn-light me-1 mb-1">Reset</button>
                                                 <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                             </div>
