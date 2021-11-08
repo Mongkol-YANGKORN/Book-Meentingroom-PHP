@@ -29,6 +29,10 @@ include '../connect.php';
             font-family: "Prompt", sans-serif;
         }
     </style>
+    <!-- datetime -->
+    <link rel="stylesheet" href="js/jquery.datetimepicker.min.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.datetimepicker.full.js"></script>
 </head>
 
 <body>
@@ -123,7 +127,7 @@ include '../connect.php';
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../index.html" class='sidebar-link'>
+                            <a href="backend\logout.php" class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -151,52 +155,50 @@ include '../connect.php';
                                     include '../connect.php';
                                     if (isset($_GET['ID_Room'])) {
                                         $room =  $_GET['ID_Room'];
-
-                                        $meSQL = ("SELECT * from Room INNER JOIN dbo.Room_Detail ON Room.ID_Room = Room_Detail.ID_Room 
-                                        inner join dbo.Equipment on Equipment.ID_Equipment = Room_Detail.ID_Equipment Where dbo.Room.ID_Room = '$room'");
+                                        $meSQL = ("SELECT dbo.Room.ID_Room,Num_Seat,Room_Dscription from Room INNER JOIN dbo.Room_Detail ON Room.ID_Room = Room_Detail.ID_Room 
+                                        inner join dbo.Equipment on Equipment.ID_Equipment = Room_Detail.ID_Equipment 
+                                        Where dbo.Room.ID_Room = '$room'");
                                         $meQuery = $conn->query($meSQL);
-
                                     ?>
                                         <?php
-                                        $i = 1;
-                                        $rs = $meQuery->fetch(PDO::FETCH_ASSOC)
+                                        while ($rs = $meQuery->fetch(PDO::FETCH_ASSOC)) {
+
                                         ?>
-                                        <div class="row">
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="ID_Room-column">รหัสห้อง</label>
-                                                    <br>
-                                                    <label><?php echo $rs['ID_Room']; ?></label>
-                                                </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="ID_Room-column">รหัสห้อง</label>
+                                                        <br>
+                                                        <label><?php echo $rs['ID_Room']; ?></label>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="Num_Seat-column">จำนวนที่นั่ง</label>
-                                                    <br>
-                                                    <label><?php echo $rs['Num_Seat']; ?></label>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Equipment_Name-column">ชื่ออุปกรณ์</label>
-                                                    <br>
-                                                    <label><?php
-                                                            $meSQL = ("SELECT * from Room INNER JOIN dbo.Room_Detail ON Room.ID_Room = Room_Detail.ID_Room 
-                                                                inner join dbo.Equipment on Equipment.ID_Equipment = Room_Detail.ID_Equipment Where dbo.Room.ID_Room = '$room'");
-                                                            $meQuery = $conn->query($meSQL);
-                                                            while ($rsd = $meQuery->fetch(PDO::FETCH_ASSOC)) {
-                                                                echo $rsd['Equipment_Name'] . ' ';
-                                                            }
-                                                            ?></label>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Room_Dscription-column">รายละเอียดเพิ่มเติม</label>
-                                                    <br>
-                                                    <label><?php echo $rs['Room_Dscription']; ?></label>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="Num_Seat-column">จำนวนที่นั่ง</label>
+                                                        <br>
+                                                        <label><?php echo $rs['Num_Seat']; ?></label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Equipment_Name-column">ชื่ออุปกรณ์</label>
+                                                        <br>
+                                                        <label><?php
+                                                                $meSQLs = ("SELECT * from Room INNER JOIN dbo.Room_Detail ON Room.ID_Room = Room_Detail.ID_Room 
+                                                                    inner join dbo.Equipment on Equipment.ID_Equipment = Room_Detail.ID_Equipment Where dbo.Room.ID_Room = '$room'");
+                                                                $meQuerys = $conn->query($meSQLs);
+                                                                while ($rsd = $meQuerys->fetch(PDO::FETCH_ASSOC)) {
+                                                                    echo $rsd['Equipment_Name'] . ' ';
+                                                                }
+                                                                ?></label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Room_Dscription-column">รายละเอียดเพิ่มเติม</label>
+                                                        <br>
+                                                        <label><?php echo $rs['Room_Dscription']; ?></label>
+                                                    </div>
 
+                                                </div>
+                                            <?php } ?>
                                             </div>
-
-
-                                        </div>
-                                    <?php } ?>
+                                        <?php } ?>
                                 </div>
                             </div>
                         </div>

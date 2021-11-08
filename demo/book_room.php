@@ -125,7 +125,7 @@ include '../connect.php';
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../index.html" class='sidebar-link'>
+                            <a href="backend\logout.php" class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -173,24 +173,14 @@ include '../connect.php';
                                                     </select>
                                                 </div>
                                             </div>
+
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="contact-info-vertical">จำนวนผู้เข้าร่วม</label>
                                                     <input type="number" id="contact-info-vertical" class="form-control" name="contact" placeholder="จำนวนผู้เข้าร่วม">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Job_title-column">ชื่อผู้จอง</label>
-                                                    <input type="text" id="Job_title-column" class="form-control" name="Job_title" placeholder="ชื่อผู้จอง">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Job_title-column">เบอร์โทรศัพท์</label>
-                                                    <input type="text" id="Job_title-column" class="form-control" name="Job_title" placeholder="เบอร์โทรศัพท์">
-                                                </div>
-                                            </div>
+
 
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group has-icon-left">
@@ -224,13 +214,16 @@ include '../connect.php';
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12 d-flex justify-content-end">
+                                            <div class="row">
 
-                                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                                <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+
+                                                <div class="col-12 d-flex justify-content-end">
+
+                                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                                </div>
+
                                             </div>
-
-                                        </div>
                                     </form>
                                 </div>
                             </div>

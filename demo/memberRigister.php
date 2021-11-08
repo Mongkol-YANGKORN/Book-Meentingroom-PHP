@@ -123,7 +123,7 @@ session_start();
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../index.html" class='sidebar-link'>
+                            <a href="backend\logout.php" class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -173,30 +173,20 @@ session_start();
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <label>แผนก</label>
-                                                    <select name="Division_name" id="Division_name" class="form-select">
-                                                        <option selected>เลือก..</option>
-                                                        <option value="Accouting">Accouting</option>
-                                                        <option value="Developers">Developers</option>
-                                                        <option value="HumanResource">Human Resource</option>
-                                                        <option value="Marketing">Marketing</option>
+                                                    <label>ตำแหน่งงาน</label>
+                                                    <?php
+                                                    include '../connect.php';
+                                                    $sql = "SELECT Job_title,ID_Division FROM Division ";
+                                                    $result = $conn->query($sql);
+                                                    ?>
 
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Job_title-column">ตำแหน่งงาน</label>
-                                                    <input type="text" id="Job_title-column" class="form-control" name="Job_title" placeholder="ตำแหน่งงาน">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Responsibility-column">บทบาท</label>
-                                                    <select name="Responsibility" id="Responsibility" class="form-select">
+                                                    <select name="ID_Division" id="ID_Room" class="form-select"> ;
                                                         <option selected>เลือก..</option>
-                                                        <option value="Admin">Admin</option>
-                                                        <option value="User">User</option>
+                                                        <?php foreach ($result as $results) { ?>
+                                                            <option value="<?php echo $results["ID_Division"]; ?>">
+                                                                <?php echo $results["Job_title"]; ?>
+                                                            </option>
+                                                        <?php } ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -213,8 +203,8 @@ session_start();
                                                 </div>
                                             </div>
                                             <div class="col-12 d-flex justify-content-end">
-                                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                                <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">ล้าง</button>
+                                                <button type="submit" class="btn btn-primary me-1 mb-1">บันทึก</button>
                                             </div>
 
                                         </div>

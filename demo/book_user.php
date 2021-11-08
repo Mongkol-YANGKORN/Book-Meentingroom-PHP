@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../connect.php';
+include './head.php'
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,7 +128,7 @@ include '../connect.php';
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../index.html" class='sidebar-link'>
+                            <a href="backend\logout.php" class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -154,7 +155,7 @@ include '../connect.php';
                             <section class="section">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form class="form" method="post" action="demo\backend\#">
+                                        <form class="form" method="post" action="book_user.php">
                                             <div class="row">
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
@@ -196,13 +197,23 @@ include '../connect.php';
                                                 </div>
                                             </div>
                                         </form>
-                                        <table class="table table-striped" id="table1">
+                                        <script>
+                                            $(document).ready(function() {
+                                                $('#example1').DataTable({
+                                                    "aaSorting": [
+                                                        [0, 'ASC']
+                                                    ],
+                                                    //"lengthMenu":[[20,50, 100, -1], [20,50, 100,"All"]]
+                                                });
+                                            });
+                                        </script>
+                                        <table class="table table-striped table-borderless" id="example1">
                                             <thead>
                                                 <tr>
                                                     <th>ลำดับ</th>
                                                     <th>ห้องประชุม</th>
                                                     <th>วัน-เวลา</th>
-                                                    <th>หัวข้อการประชุม</th>
+
                                                     <th>ชื่อผู้จอง</th>
                                                     <th>แสดง</th>
                                                 </tr>
@@ -212,6 +223,7 @@ include '../connect.php';
                                                 $meSQL = "SELECT * FROM Booked INNER Join Member ON Booked.ID_Member = Member.ID_Member 
                                                 INNER JOIN dbo.Room ON Room.ID_Room = Booked.ID_Room ";
                                                 $meQuery = $conn->query($meSQL);
+
                                             ?>
                                                 <tbody>
                                                     <?php
@@ -224,15 +236,11 @@ include '../connect.php';
                                                             <td> <?php echo $rs['Room_Name']
                                                                     ?></td>
                                                             <td><?php echo $rs['Event_Start'] ?></td>
-                                                            <td><?php if (empty($rs['Room_Description'])) {
-                                                                    echo ".";
-                                                                } else {
-                                                                    echo $rs['Room_Description'];
-                                                                }
-                                                                ?></td>
+
                                                             <td><?php echo $rs['Member_Name'] ?></td>
                                                             <td>
-                                                                <a href="#" class="btn-sm btn-success">แสดง</a>
+
+                                                                <a href="book_detailShow.php?ID_Booked=<?php echo $rs["ID_Booked"]; ?>" class="btn-sm btn-success">แสดง</a>
                                                             </td>
                                                         </tr>
                                                     <?php } ?>

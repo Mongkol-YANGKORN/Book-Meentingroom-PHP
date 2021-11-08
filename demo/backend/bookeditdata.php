@@ -34,10 +34,11 @@ if (!empty($_POST)) {
         $stm->bindParam("ID_Booked", $_POST["ID_Booked"]);
         $stm->execute();
         if ($stm->rowCount()) {
-            echo "Record add successfully";
+            echo "UPDATE successfully";
+            header("refresh: 2;Location:http://localhost/meetingroom/demo/book_detail.php");
         } else {
-            echo "Record add Faill";
-            //header("Location:http://localhost/meetingroom/demo/memberRigister.php");
+            echo "UPDATE Faill";
+            header("refresh: 2;Location:http://localhost/meetingroom/demo/book_detail.php");
         }
     }
     $conn = null;

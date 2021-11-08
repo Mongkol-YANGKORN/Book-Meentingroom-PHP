@@ -123,7 +123,7 @@ include '../connect.php';
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../index.html" class='sidebar-link'>
+                            <a href="backend\logout.php" class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -148,77 +148,78 @@ include '../connect.php';
                             <div class="card-content">
                                 <div class="card-body">
                                     <?php
+                                    $member = $_GET['ID_Member'];
                                     if (!isset($_GET['action'])) {
-                                        $meSQL = "SELECT * FROM member";
+                                        $meSQL = "SELECT * from Member 
+                                        INNER JOIN Division ON Member.ID_Division = Division.ID_Division  Where ID_Member ='$member'";
                                         $meQuery = $conn->query($meSQL);
                                     ?>
+                                        <?php
+                                        $i = 1;
+                                        while ($rs = $meQuery->fetch(PDO::FETCH_ASSOC)) {
+                                        ?>
+                                            <div class="row">
 
-                                        <div class="row">
-
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="ID_Member-column">รหัสผู้ใช้งาน</label>
-                                                    <br>
-                                                    <label></label>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="ID_Member-column">รหัสผู้ใช้งาน</label>
+                                                        <br>
+                                                        <label><?php echo $rs['ID_Member']; ?></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Member_Name-column">ชื่อ-นามสกุล</label>
-
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Member_Name-column">ชื่อ-นามสกุล</label>
+                                                        <br>
+                                                        <label><?php echo $rs['Member_Name']; ?></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Username-column">Username</label>
-
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Username-column">Username</label>
+                                                        <label><?php echo $rs['Username']; ?></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Password-column">Password</label>
-
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Password-column">Password</label>
+                                                        <label><?php echo $rs['Password']; ?></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label>แผนก</label>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>แผนก</label>
+                                                        <label><?php echo $rs['Division_Name']; ?></label>
 
-
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Job_title-column">ตำแหน่งงาน</label>
-
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Job_title-column">ตำแหน่งงาน</label>
+                                                        <label><?php echo $rs['Job_title']; ?></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Responsibility-column">บทบาท</label>
-
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Responsibility-column">บทบาท</label>
+                                                        <label><?php echo $rs['Responsibility']; ?></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Member_Tel-column">เบอร์โทรศัพท์</label>
-
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Member_Tel-column">เบอร์โทรศัพท์</label>
+                                                        <label><?php echo $rs['Member_Tel']; ?></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label for="Address-column">ที่อยู่</label>
-
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="Address-column">ที่อยู่</label>
+                                                        <label><?php echo $rs['Member_Address']; ?></label>
+                                                    </div>
                                                 </div>
+
                                             </div>
-
-                                            <div class="col-12 d-flex justify-content-end">
-                                                <a href="auth-login.php" class="btn btn-warning me-1 mb-1">แก้ไข</a>
-                                                <a href="auth-login.php" class="btn btn-danger me-1 mb-1">ลบ</a>
-                                            </div>
-
-                                        </div>
-
+                                        <?php } ?>
                                     <?php } ?>
                                 </div>
 

@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../connect.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +30,10 @@ include '../connect.php';
             font-family: "Prompt", sans-serif;
         }
     </style>
+    <!-- datetime -->
+    <link rel="stylesheet" href="js/jquery.datetimepicker.min.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.datetimepicker.full.js"></script>
 </head>
 
 <body>
@@ -123,7 +128,7 @@ include '../connect.php';
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../index.html" class='sidebar-link'>
+                            <a href="backend\logout.php" class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -140,8 +145,105 @@ include '../connect.php';
             </header>
 
             <div class="page-heading">
-                <h3>รายงานสถิติประจำเดือน</h3>
+                <h3>รายงานสถิติ</h3>
             </div>
+            <section id="multiple-column-form">
+                <div class="row match-height">
+                    <div class="col-12">
+                        <div class="card">
+                            <section class="section">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form class="form" method="post" action="statisticsshow.php">
+                                            <div class="row">
+
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group has-icon-left">
+                                                        <label for="ID_Member-column">วัน-เดือน-ปี เริ่มต้น</label>
+                                                        <div class="position-relative">
+                                                            <input name='date' id="datetime" class="form-control" placeholder="วันที่เริ่มต้น" />
+                                                            <script>
+                                                                $("#datetime").datetimepicker({
+                                                                    step: 15
+                                                                });
+                                                            </script>
+                                                            <div class="form-control-icon">
+                                                                <i class="bi bi-clock"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group has-icon-left">
+                                                        <label for="ID_Member-column">วัน-เดือน-ปี สิ้นสุด</label>
+                                                        <div class="position-relative">
+                                                            <input name='date2' id="datetime" class="form-control" placeholder="วันที่สิ้นสุด" />
+                                                            <script>
+                                                                $("#datetime").datetimepicker({
+                                                                    step: 15
+                                                                });
+                                                            </script>
+                                                            <div class="form-control-icon">
+                                                                <i class="bi bi-clock"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 d-flex justify-content-end">
+                                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                        <button type="submit" class="btn btn-primary me-1 mb-1">ค้นหา</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+
+                                        <table class="table table-striped table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>ลำดับ</th>
+                                                    <th>ห้องประชุม</th>
+                                                    <th>จำนวนครั้ง</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <?php
+                                            if (!isset($_GET['action'])) {
+                                                $sql = ("SELECT DISTINCT Room_Name FROM Booked INNER JOIN Room ON Booked.ID_Room=Room.ID_Room");
+                                                $query = $conn->query($sql);
+                                            ?>
+                                                <tbody><?php
+                                                        $i = 1;
+                                                        while ($rs = $query->fetch(PDO::FETCH_ASSOC)) {
+                                                        ?>
+                                                        <tr>
+                                                            <td> <?php echo $i++ ?> </td>
+                                                            <td> <?php echo $rs['Room_Name']
+                                                                    ?></td>
+                                                            <td><?php
+                                                                $rooms = $rs['Room_Name'];
+                                                                $meSQL = ("SELECT COUNT(ID_Booked)FROM Booked 
+                                                                INNER JOIN Room ON Booked.ID_Room=Room.ID_Room where Room_Name = '$rooms' ");
+                                                                $meQuery = $conn->query($meSQL);
+                                                                $count = $meQuery->fetchColumn();
+                                                                echo $count;
+                                                                ?></td>
+
+                                                        </tr>
+
+                                                </tbody>
+                                            <?php } ?>
+                                        <?php } ?>
+                                        </table>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
 
 

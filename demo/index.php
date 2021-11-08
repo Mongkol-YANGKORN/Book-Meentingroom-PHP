@@ -1,6 +1,10 @@
 <?php
 session_start();
 include '../connect.php';
+$fullcalendar_path = "fullcalendar-4.4.2/packages/";
+include '../demo/head.php';
+
+
 
 ?>
 <!DOCTYPE html>
@@ -22,6 +26,8 @@ include '../connect.php';
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+
+
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap%22");
 
@@ -33,6 +39,76 @@ include '../connect.php';
             font-family: "Prompt", sans-serif;
         }
     </style>
+
+
+    <link href='<?= $fullcalendar_path ?>/core/main.css' rel='stylesheet' />
+    <link href='<?= $fullcalendar_path ?>/daygrid/main.css' rel='stylesheet' />
+
+    <script src='<?= $fullcalendar_path ?>/core/main.js'></script>
+    <script src='<?= $fullcalendar_path ?>/daygrid/main.js'></script>
+
+    <style type="text/css">
+        #calendar {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+    <!-- datetime -->
+    <link rel="stylesheet" href="js/jquery.datetimepicker.min.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.datetimepicker.full.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                eventLimit: true,
+                defaultDate: new Date(),
+                timezone: 'Asia/Bangkok',
+                events: {
+                    url: './dataEvents.php',
+                },
+                loading: function(bool) {
+                    $('#loading').toggle(bool);
+                },
+
+                eventClick: function(event) {
+                    if (event.url) {
+                        $.fancybox({
+                            'href': event.url,
+                            'type': 'iframe',
+                            'autoScale': false,
+                            'openEffect': 'elastic',
+                            'openSpeed': 'fast',
+                            'closeEffect': 'elastic',
+                            'closeSpeed': 'fast',
+                            'closeBtn': true,
+                            onClosed: function() {
+                                parent.location.reload(true);
+                            },
+                            helpers: {
+                                thumbs: {
+                                    width: 50,
+                                    height: 50
+                                },
+
+                                overlay: {
+                                    css: {
+                                        'background': 'rgba(49, 176, 213, 0.7)'
+                                    }
+                                }
+                            }
+                        });
+                        return false;
+                    }
+                },
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -127,7 +203,7 @@ include '../connect.php';
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../index.html" class='sidebar-link'>
+                            <a href="backend\logout.php" class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -195,9 +271,9 @@ include '../connect.php';
 
                                                 if (!isset($_GET['action'])) {
 
-                                                    //รอแก้การjoinใหม่ 
-                                                    $meSQL = ("SELECT COUNT(Responsibility) FROM Division INNER Join Member 
-                                                 ON dbo.Division.ID_Division=dbo.Member.ID_Division where Responsibility Like 'Admin'");
+
+                                                    $meSQL = ("SELECT COUNT(ID_Member) FROM Division INNER Join Member 
+                                                    ON dbo.Division.ID_Division=dbo.Member.ID_Division where Responsibility Like 'Admin'");
                                                     $meQuery = $conn->query($meSQL);
                                                     $count = $meQuery->fetchColumn();
 
@@ -225,7 +301,9 @@ include '../connect.php';
                                                 <?php
 
                                                 if (!isset($_GET['action'])) {
-                                                    $meSQL = ("SELECT COUNT(Responsibility) FROM Division WHERE Responsibility Like 'User'");
+
+                                                    $meSQL = ("SELECT COUNT(ID_Member) FROM Division INNER Join Member 
+                                                    ON dbo.Division.ID_Division=dbo.Member.ID_Division where Responsibility Like 'User'");
                                                     $meQuery = $conn->query($meSQL);
                                                     $count = $meQuery->fetchColumn();
 
@@ -239,14 +317,69 @@ include '../connect.php';
                                 </div>
                             </div>
                         </div>
+                        <div class="col-6 col-lg-12 col-md-6">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon blue">
+                                                <i class="iconly-boldCalendar"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <a href="./fullcalendar-4.4.2/fullcalendar-php-master/index.php" class="btn btn-outline-primary">ปฏิทินการจองห้องประชุม</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <h4>ปฏิทิน</h4>
                                     </div>
-                                    <div class="card-body">
 
+                                    <div class="container">
+                                        <div class="row">
+
+                                            <div class='col-md-12'>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div id='calendar'></div>
+                                                                <div style="margin:10px 0 50px 0;" align="center">
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div id='calendar'></div>
+
+                                        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+                                        <script type="text/javascript">
+                                            $(function() {
+                                                // กำหนด element ที่จะแสดงปฏิทิน
+                                                var calendarEl = $("#calendar")[0];
+
+                                                // กำหนดการตั้งค่า
+                                                var calendar = new FullCalendar.Calendar(calendarEl, {
+                                                    plugins: ['dayGrid']
+                                                });
+
+                                                // แสดงปฏิทิน 
+
+
+                                            });
+                                            calendar.render();
+                                        </script>
 
                                     </div>
                                 </div>
@@ -274,6 +407,11 @@ include '../connect.php';
     <script src="assets/js/pages/dashboard.js"></script>
 
     <script src="assets/js/main.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="js/fullcalendar-2.1.1/lib/moment.min.js"></script>
+    <script type="text/javascript" src="js/fullcalendar-2.1.1/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="js/fullcalendar-2.1.1/lang/th.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 </body>
 
 </html>

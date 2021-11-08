@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../connect.php';
+include './head.php'
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +31,7 @@ include '../connect.php';
         }
     </style>
 </head>
+
 
 <body>
     <div id="app">
@@ -123,7 +125,7 @@ include '../connect.php';
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../index.html" class='sidebar-link'>
+                            <a href="backend\logout.php" class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -147,11 +149,21 @@ include '../connect.php';
                         </div>
                     </div>
                 </div>
+                <script>
+                    $(document).ready(function() {
+                        $('#example1').DataTable({
+                            "aaSorting": [
+                                [0, 'ASC']
+                            ],
+                            //"lengthMenu":[[20,50, 100, -1], [20,50, 100,"All"]]
+                        });
+                    });
+                </script>
                 <section class="section">
                     <div class="card">
 
                         <div class="card-body">
-                            <table class="table table-striped" id="table1">
+                            <table class="table table-striped table-borderless" id="example1">
                                 <thead>
                                     <tr>
                                         <th>ลำดับ</th>
@@ -183,13 +195,13 @@ include '../connect.php';
                                                 <td><?php echo $rs['Member_Name'] ?></td>
                                                 <td><?php echo $rs['Responsibility'] ?></td>
                                                 <td>
-                                                    <a href="memberShow.php" class="btn-sm btn-success">แสดง</a>
+                                                    <a href="memberShow.php?ID_Member=<?php echo $rs["ID_Member"]; ?>" class="btn-sm btn-success">แสดง</a>
                                                 </td>
                                                 <td>
                                                     <a href="memberEdit.php?ID_Member=<?php echo $rs["ID_Member"]; ?>" class="btn-sm btn-warning">แก้ไข</a>
                                                 </td>
                                                 <td>
-                                                    <a href="#" class="btn-sm btn-danger">ลบ</a>
+                                                    <a href="backend\memberdelete.php?ID_Member=<?php echo $rs["ID_Member"]; ?>" class="btn-sm btn-danger">ลบ</a>
                                                 </td>
                                         </tr>
 

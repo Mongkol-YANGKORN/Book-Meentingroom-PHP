@@ -29,6 +29,10 @@ include '../connect.php';
             font-family: "Prompt", sans-serif;
         }
     </style>
+    <!-- datetime -->
+    <link rel="stylesheet" href="js/jquery.datetimepicker.min.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.datetimepicker.full.js"></script>
 </head>
 
 <body>
@@ -123,7 +127,7 @@ include '../connect.php';
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../index.html" class='sidebar-link'>
+                            <a href="backend\logout.php" . class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -149,59 +153,62 @@ include '../connect.php';
                                 <div class="card-body">
                                     <?php
                                     if (!isset($_GET['action'])) {
-                                        $meSQL = "SELECT * FROM room";
+                                        $book = $_GET['ID_Booked'];
+                                        $meSQL = "SELECT * FROM Booked INNER JOIN Room ON Booked.ID_Room=Room.ID_Room  
+                                        INNER JOIN dbo.Member on Member.ID_Member= dbo.Booked.ID_Member Where ID_Booked = '$book' ";
                                         $meQuery = $conn->query($meSQL);
                                     ?>
+                                        <?php
+                                        $i = 1;
+                                        while ($rs = $meQuery->fetch(PDO::FETCH_ASSOC)) {
+                                        ?>
+                                            <div class="row">
 
-                                        <div class="row">
-
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="ID_Member-column">ชื่อห้อง</label>
-                                                    <br>
-                                                    <label></label>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="ID_Member-column">ชื่อห้อง</label>
+                                                        <br>
+                                                        <label><?php echo $rs['Room_Name'] ?></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Member_Name-column">จำนวนผู้เข้าประชุม</label>
-
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Member_Name-column">จำนวนผู้เข้าประชุม</label>
+                                                        <label><?php echo $rs['Num_User'] . " คน" ?></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Username-column">ชื่อผู้จอง</label>
-
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Username-column">ชื่อผู้จอง</label>
+                                                        <label><?php echo $rs['Member_Name'] ?></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Password-column">เบอร์โทรศัทพ์</label>
-
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Password-column">เบอร์โทรศัทพ์</label>
+                                                        <label><?php echo $rs['Member_Tel'] ?></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label>เวลาเริ่มต้น</label>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>เวลาเริ่มต้น</label>
+                                                        <label><?php echo $rs['Event_Start'] ?></label>
 
-
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Job_title-column">เวลาสิ้นสุด</label>
-
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="Job_title-column">เวลาสิ้นสุด</label>
+                                                        <label><?php echo $rs['Event_End'] ?></label>
+                                                    </div>
                                                 </div>
+                                                <div class="col-12 d-flex justify-content-end">
+                                                    <button href="user_editpersonldetail.php" class="btn-sm btn-warning me-1 mb-1">แก้ไข</button>
+                                                    <button type="" class="btn-sm btn-danger me-1 mb-1">ยกเลิก</button>
+                                                </div>
+
                                             </div>
-
-
-                                            <div class="col-12 d-flex justify-content-end">
-                                                <button href="user_editpersonldetail.php" class="btn-sm btn-warning me-1 mb-1">แก้ไข</button>
-                                                <button type="" class="btn-sm btn-danger me-1 mb-1">ยกเลิก</button>
-                                            </div>
-
-                                        </div>
-
+                                        <?php } ?>
                                     <?php } ?>
                                 </div>
 

@@ -14,7 +14,7 @@ if (!empty($_POST)) {
     $result1 = $conn->query(" SELECT Room_Name FROM Room WHERE  Room_Name = '$name' ")->fetchColumn();
     if ($result1 > 0) {
         echo "ชื่อห้องนี้ถูกใช้งานแล้ว" . "<br>";
-        //echo '<a href=http://localhost/meetingroom/demo/memberRigister.php>ไปแก้รายการ</a>';
+        echo '<a href=http://localhost/meetingroom/demo/roomAdd.php>ไปแก้รายการ</a>';
     } else {
         $stm = $conn->prepare("INSERT INTO Room (Room_Name,Num_seat,Room_Dscription) 
             VALUES (:Room_Name, :Num_seat,:Room_Dscription)");
@@ -24,9 +24,10 @@ if (!empty($_POST)) {
         $stm->execute();
         if ($stm->rowCount()) {
             echo "Record add successfully";
+            header("Location:http://localhost/meetingroom/demo/addequipmenttoroom.php");
         } else {
-            echo "Record add Faill";
-            //header("Location:http://localhost/meetingroom/demo/memberRigister.php");
+            echo 'บันทึกรายการผิดพลาด<br>';
+            echo '<a href=http://localhost/meetingroom/demo/roomAdd.php>ไปแก้รายการ</a>';
         }
     }
 

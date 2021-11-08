@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../connect.php';
+$fullcalendar_path = "fullcalendar-4.4.2/packages/";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +30,35 @@ include '../connect.php';
             font-family: "Prompt", sans-serif;
         }
     </style>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap%22");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            font-family: "Prompt", sans-serif;
+        }
+    </style>
+
+
+    <link href='<?= $fullcalendar_path ?>/core/main.css' rel='stylesheet' />
+    <link href='<?= $fullcalendar_path ?>/daygrid/main.css' rel='stylesheet' />
+
+    <script src='<?= $fullcalendar_path ?>/core/main.js'></script>
+    <script src='<?= $fullcalendar_path ?>/daygrid/main.js'></script>
+
+    <style type="text/css">
+        #calendar {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+    <!-- datetime -->
+    <link rel="stylesheet" href="js/jquery.datetimepicker.min.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.datetimepicker.full.js"></script>
 </head>
 
 <body>
@@ -92,9 +122,51 @@ include '../connect.php';
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
+
+
+
             <div class="page-heading">
-                <h3>Dashboard</h3>
+                <h3>Dashborad</h3>
             </div>
+            <div class="page-content">
+                <section class="row">
+                    <div class="col-12 col-lg-20">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>ปฏิทิน</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id='calendar'></div>
+                                        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+                                        <script type="text/javascript">
+                                            $(function() {
+                                                // กำหนด element ที่จะแสดงปฏิทิน
+                                                var calendarEl = $("#calendar")[0];
+
+                                                // กำหนดการตั้งค่า
+                                                var calendar = new FullCalendar.Calendar(calendarEl, {
+                                                    plugins: ['dayGrid']
+                                                });
+
+                                                // แสดงปฏิทิน 
+                                                calendar.render();
+
+                                            });
+                                        </script>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+            </div>
+
 
 
 

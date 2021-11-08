@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../connect.php';
+include './head.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,7 +128,7 @@ include '../connect.php';
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../index.html" class='sidebar-link'>
+                            <a href="backend\logout.php" class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -149,12 +150,12 @@ include '../connect.php';
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">ข้อมูลการจอง</h4>
+                                <h4 class="card-title">ข้อมูลการจองของฉัน</h4>
                             </div>
                             <section class="section">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form class="form" method="post" action="demo\backend\#">
+                                        <form class="form" method="post" action="showdetailbook.php">
                                             <div class="row">
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
@@ -178,7 +179,7 @@ include '../connect.php';
                                                     <div class="form-group has-icon-left">
                                                         <label for="ID_Member-column">วันที่จอง</label>
                                                         <div class="position-relative">
-                                                            <input id="datetime" class="form-control" placeholder="เลือกวันที่จอง" />
+                                                            <input name="datetime" id="datetime" class="form-control" placeholder="เลือกเวลาที่จอง" />
                                                             <script>
                                                                 $("#datetime").datetimepicker({
                                                                     step: 15
@@ -196,7 +197,55 @@ include '../connect.php';
                                                 </div>
                                             </div>
                                         </form>
-                                        <table class="table table-striped" id="table1">
+                                        <style>
+                                            * {
+                                                box-sizing: border-box;
+                                            }
+
+                                            #myInput {
+                                                background-image: url('/css/searchicon.png');
+                                                background-position: 10px 10px;
+                                                background-repeat: no-repeat;
+                                                width: 100%;
+                                                font-size: 16px;
+                                                padding: 12px 20px 12px 40px;
+                                                border: 1px solid #ddd;
+                                                margin-bottom: 12px;
+                                            }
+
+                                            #myTable {
+                                                border-collapse: collapse;
+                                                width: 100%;
+                                                border: 1px solid #ddd;
+                                                font-size: 18px;
+                                            }
+
+                                            #myTable th,
+                                            #myTable td {
+                                                text-align: left;
+                                                padding: 12px;
+                                            }
+
+                                            #myTable tr {
+                                                border-bottom: 1px solid #ddd;
+                                            }
+
+                                            #myTable tr.header,
+                                            #myTable tr:hover {
+                                                background-color: #f1f1f1;
+                                            }
+                                        </style>
+                                        <script>
+                                            $(document).ready(function() {
+                                                $('#example1').DataTable({
+                                                    "aaSorting": [
+                                                        [0, 'ASC']
+                                                    ],
+                                                    //"lengthMenu":[[20,50, 100, -1], [20,50, 100,"All"]]
+                                                });
+                                            });
+                                        </script>
+                                        <table class="table table-striped table-borderless" id="example1">
                                             <thead>
                                                 <tr>
                                                     <th>ลำดับ</th>
@@ -205,46 +254,101 @@ include '../connect.php';
 
                                                     <!-- <th>หัวข้อการประชุม</th> -->
 
-                                                    <th>จำนวนที่นั่ง</th>
+                                                    <th>จำนวนผู้เข้าประชุม</th>
+                                                    <th>สถานะ</th>
                                                     <th>แสดง</th>
                                                     <th>แก้ไข</th>
+                                                    <!--<th>ยกเลิก</th>-->
                                                     <th>ลบ</th>
                                                 </tr>
                                             </thead>
                                             <?php
+
                                             if (!isset($_GET['action'])) {
-                                                $user = $_SESSION["login_id"];
-                                                $meSQL = "SELECT * FROM Booked INNER JOIN Room ON Booked.ID_Room=Room.ID_Room Where ID_Member ='$user' ";
-                                                $meQuery = $conn->query($meSQL);
+                                                if (empty($_POST['datetime']) and (empty($_POST['ID_Room']))) {
+                                                    $user = $_SESSION["login_id"];
+                                                    $meSQL = "SELECT * FROM Booked INNER JOIN Room ON
+                                                        Booked.ID_Room=Room.ID_Room Where ID_Member ='$user' ";
+                                                    $meQuery = $conn->query($meSQL);
+                                                } elseif (empty($_POST['ID_Room'])) {
+                                                    echo $_POST['datetime'];
+                                                    $user = $_SESSION["login_id"];
+                                                    $dateseach = $_POST['datetime'];
+                                                    $meSQL = "SELECT * FROM Booked INNER JOIN Room ON Booked.ID_Room=Room.ID_Room 
+                                                        Where ID_Member ='$user'";
+                                                    $meQuery = $conn->query($meSQL);
+                                                } elseif (empty($_POST['datetime'])) {
+                                                    $roomseach = $_POST['ID_Room'];
+                                                    $user = $_SESSION["login_id"];
+                                                    $meSQL = "SELECT * FROM Booked INNER JOIN Room ON Booked.ID_Room=Room.ID_Room 
+                                                    Where ID_Member ='$user' And dbo.Room.ID_Room = '$roomseach'";
+                                                    $meQuery = $conn->query($meSQL);
+                                                }
+
                                             ?>
                                                 <tbody>
+
                                                     <?php
                                                     $i = 1;
                                                     while ($rs = $meQuery->fetch(PDO::FETCH_ASSOC)) {
+
                                                     ?>
                                                         <tr>
+
                                                             <td> <?php echo $i++ ?> </td>
+
                                                             <td> <?php echo $rs['Room_Name']
                                                                     ?></td>
-                                                            <td><?php echo $rs['Event_Start']
+                                                            <td><?php
+
+                                                                echo $rs['Event_Start'];
+
                                                                 ?></td>
                                                             <!-- <td>dd</td> -->
-                                                            <td><?php echo $rs['Num_Seat']
+                                                            <td><?php
+                                                                echo $rs['Num_User'];
+
+                                                                ?></td>
+                                                            <td><?php
+                                                                $timezone = new DateTimeZone("Asia/Bangkok");
+                                                                $bangkokTime = new DateTime("now", $timezone);
+                                                                $result = $bangkokTime->format('Y-m-d H:i:s');
+                                                                $result1 = $rs['Event_Start'];
+                                                                $late = (strtotime($result1) - strtotime($result));
+                                                                $late = ($late / (60 * 60));
+                                                                if ($late >  60) {
+                                                                    echo 'การจองจบไปแล้ว';
+                                                                    echo $late;
+                                                                } elseif ($late >  15) {
+                                                                    echo 'ยกเลิก';
+                                                                    echo $late;
+                                                                } elseif ($late < 0) {
+                                                                    echo 'การจองจบไปแล้ว';
+                                                                    echo $late;
+                                                                }
+                                                                echo $late;
                                                                 ?></td>
                                                             <td>
-                                                                <a href="#" class="btn-sm btn-success">แสดง</a>
+
+                                                                <a href="book_detailShow.php?ID_Booked=<?php echo $rs["ID_Booked"]; ?>" class="btn-sm btn-success">แสดง</a>
                                                             </td>
                                                             <td>
                                                                 <a href="book_roomEdit.php?ID_Booked=<?php echo $rs["ID_Booked"]; ?>" class="btn-sm btn-warning">แก้ไข</a>
                                                             </td>
+                                                            <!--<td>
+                                                                <a href="book_roomEdit.php?ID_Booked=<?php //echo $rs["ID_Booked"]; 
+                                                                                                        ?>" class="btn-sm btn-warning">ยกเลิก</a>
+                                                            </td>-->
                                                             <td>
-                                                                <a href="#" class="btn-sm btn-danger">ลบ</a>
+                                                                <a href="backend\bookdelete.php?ID_Booked=<?php echo $rs["ID_Booked"]; ?>" class="btn-sm btn-danger">ลบ</a>
                                                             </td>
+
                                                         </tr>
                                                     <?php } ?>
                                                 </tbody>
                                             <?php } ?>
                                         </table>
+
                                     </div>
                                 </div>
                             </section>

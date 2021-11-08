@@ -123,7 +123,7 @@ session_start();
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../index.html" class='sidebar-link'>
+                            <a href="backend\logout.php" class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -166,7 +166,7 @@ session_start();
                                                             $rs = $meQuery->fetch(PDO::FETCH_ASSOC)
                                                             ?>
                                                             <div class="form-group">
-                                                                <label for="Member_Name-column"> <?php echo $rs["ID_Room"]; ?> </label>
+                                                                <label for="Member_Name-column"> <?php echo $room ?> </label>
                                                                 <input type="hidden" name="ID_Room" value="<?php echo $rs["ID_Room"]; ?>" />
 
                                                             </div>

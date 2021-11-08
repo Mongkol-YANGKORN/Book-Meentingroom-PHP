@@ -32,7 +32,7 @@ if (!empty($_POST)) {
             } else {
                 //$password = sha1($password);
                 $stm = $conn->prepare("INSERT INTO Member (Username, Password, Member_Name,Member_Address,Member_Tel,ID_Division) 
-            VALUES (:Username, :Password,:Member_Name,:Address, :Member_Tel, :ID_Division)");
+                                            VALUES (:Username, :Password,:Member_Name,:Address, :Member_Tel, :ID_Division)");
                 $stm->bindParam("Username", $_POST['Username']);
                 $stm->bindParam("Password", $_POST['Password']);
                 $stm->bindParam("Member_Name", $_POST["Member_Name"]);
@@ -42,9 +42,10 @@ if (!empty($_POST)) {
                 $stm->execute();
                 if ($stm->rowCount()) {
                     echo "Record add successfully";
+                    header("refresh 2 ;:Location:http://localhost/meetingroom/demo/memberRigister.php");
                 } else {
                     echo "Record add Faill";
-                    header("Location:http://localhost/meetingroom/demo/memberRigister.php");
+                    header("refresh 2 ;:Location:http://localhost/meetingroom/demo/memberRigister.php");
                 }
             }
         }

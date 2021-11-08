@@ -20,14 +20,13 @@ if (!empty($_POST)) {
     and Booked.Event_End = Convert(DATETIME ,'$dateend ')And ID_Room = ('$room')  ")->fetchColumn();
     if ($checkdate > 0) {
         echo 'ขอโทษนะครับ!!! คิวเวลานี้ถูกจองไว้แล้วนะครับ';
-        header("Location:http://localhost/meetingroom/demo/book_room.php");
+        echo '<a href=http://localhost/meetingroom/demo/book_room.php>ไปแก้รายการ</a>';
     } else if ($seat > $result) {
         echo 'ขอโทษนะครับ!!! จองที่นั่งเยอะเกินไปนะครับ ห้องนี้มีแค่ ' . $result . " ที่นั่ง";
-        header("Location:http://localhost/meetingroom/demo/book_room.php");
+        echo '<a href=http://localhost/meetingroom/demo/book_room.php>ไปแก้รายการ</a>';
     } else {
         $stm = $conn->prepare("INSERT INTO Booked (Num_User,Event_Start,Event_End,ID_Room,ID_Member) 
             VALUES (:seat,:datetime,:datetime2,:ID_Room,:ID_Member)");
-
         $stm->bindParam("seat", $_POST['contact']);
         $stm->bindParam("datetime", $_POST["datetime"]);
         $stm->bindParam("datetime2", $_POST["datetime2"]);
@@ -35,10 +34,10 @@ if (!empty($_POST)) {
         $stm->bindParam("ID_Member", $_SESSION["login_id"]);
         $stm->execute();
         if ($stm->rowCount()) {
-            echo "Record add successfully";
+            header("Location:http://localhost/meetingroom/demo/addequipment.php");
         } else {
             echo "Record add Faill";
-            //header("Location:http://localhost/meetingroom/demo/memberRigister.php");
+            header("refresh: 2;Location:http://localhost/meetingroom/demo/book_room.php");
         }
         $conn = null;
     }

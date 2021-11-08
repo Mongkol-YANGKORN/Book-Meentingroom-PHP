@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../connect.php';
+include './head.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +30,10 @@ include '../connect.php';
             font-family: "Prompt", sans-serif;
         }
     </style>
+    <!-- datetime -->
+    <link rel="stylesheet" href="js/jquery.datetimepicker.min.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.datetimepicker.full.js"></script>
 </head>
 
 <body>
@@ -123,7 +128,7 @@ include '../connect.php';
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../index.html" class='sidebar-link'>
+                            <a href="backend\logout.php" class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -148,10 +153,20 @@ include '../connect.php';
                             <div class="card-header">
                                 <h4 class="card-title">ข้อมูลห้องประชุม</h4>
                             </div>
+                            <script>
+                                $(document).ready(function() {
+                                    $('#example1').DataTable({
+                                        "aaSorting": [
+                                            [0, 'ASC']
+                                        ],
+                                        //"lengthMenu":[[20,50, 100, -1], [20,50, 100,"All"]]
+                                    });
+                                });
+                            </script>
                             <section class="section">
                                 <div class="card">
                                     <div class="card-body">
-                                        <table class="table table-striped" id="table1">
+                                        <table class="table table-striped table-borderless" id="example1">
                                             <thead>
                                                 <tr>
                                                     <th>ลำดับ</th>
@@ -161,7 +176,7 @@ include '../connect.php';
 
                                                     <th>รายละเอียดเพิ่มเติม</th>
                                                     <th>แสดง</th>
-                                                    <th>เพิ่ม/แก้ไขอุปกรณ์</th>
+
                                                     <th>แก้ไขห้องประชุม</th>
                                                     <th>ลบ</th>
                                                 </tr>
@@ -189,16 +204,13 @@ include '../connect.php';
                                                             <td>
                                                                 <a href="roomShow.php?ID_Room=<?php echo $rs["ID_Room"]; ?>" class="btn-sm btn-success">แสดง</a>
                                                             </td>
-                                                            <td>
 
-                                                                <a href="roomAddEquipment.php?ID_Room=<?php echo $rs["ID_Room"]; ?>" class="btn-sm btn-info">เพิ่ม/แก้ไขอุปกรณ์</a>
-                                                            </td>
                                                             <td>
 
                                                                 <a href='roomEdit.php?ID_Room=<?php echo $rs["ID_Room"]; ?>' class='btn-sm btn-warning'>แก้ไขห้องประชุม</a>
                                                             </td>
                                                             <td>
-                                                                <a href="#" class="btn-sm btn-danger">ลบ</a>
+                                                                <a href="backend\roomdelete.php?ID_Room=<?php echo $rs["ID_Room"]; ?>" class="btn-sm btn-danger">ลบ</a>
                                                             </td>
 
 

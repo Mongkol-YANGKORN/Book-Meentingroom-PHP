@@ -107,7 +107,7 @@ include '../connect.php';
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="demo\backend\#">
+                                    <form class="form" method="post" action="backend\addbook.php">
                                         <div class="row">
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
@@ -128,35 +128,20 @@ include '../connect.php';
                                                     </select>
                                                 </div>
                                             </div>
+
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="contact-info-vertical">จำนวนผู้เข้าร่วม</label>
                                                     <input type="number" id="contact-info-vertical" class="form-control" name="contact" placeholder="จำนวนผู้เข้าร่วม">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Job_title-column">ชื่อผู้จอง</label>
-                                                    <input type="text" id="Job_title-column" class="form-control" name="Job_title" placeholder="ชื่อผู้จอง">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Job_title-column">เบอร์โทรศัพท์</label>
-                                                    <input type="text" id="Job_title-column" class="form-control" name="Job_title" placeholder="เบอร์โทรศัพท์">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label for="Address-column">หัวข้อการประชุม</label>
-                                                    <input type="text" id="Address-column" class="form-control" name="Address" placeholder="หัวข้อการประชุม">
-                                                </div>
-                                            </div>
+
+
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group has-icon-left">
                                                     <label for="ID_Member-column">เวลาเริ่มต้น</label>
                                                     <div class="position-relative">
-                                                        <input id="datetime" class="form-control" placeholder="เลือกเวลาเริ่มต้น" />
+                                                        <input name="datetime" id="datetime" class="form-control" placeholder="เลือกเวลาเริ่มต้น" />
                                                         <script>
                                                             $("#datetime").datetimepicker({
                                                                 step: 15
@@ -172,7 +157,7 @@ include '../connect.php';
                                                 <div class="form-group has-icon-left">
                                                     <label for="ID_Member-column">เวลาสิ้นสุด</label>
                                                     <div class="position-relative">
-                                                        <input id="datetime2" class="form-control" placeholder="เลือกเวลาสิ้นสุด" />
+                                                        <input name="datetime2" id="datetime2" class="form-control" placeholder="เลือกเวลาสิ้นสุด" />
                                                         <script>
                                                             $("#datetime2").datetimepicker({
                                                                 step: 15
@@ -184,13 +169,42 @@ include '../connect.php';
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12 d-flex justify-content-end">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label>อุปกรณ์เพิ่มเติม</label>
+                                                    </div>
+                                                    <li class="d-inline-block me-2 mb-1">
+                                                        <div class="form-check">
+                                                            <div class="checkbox">
+                                                                <?php
+                                                                include '../connect.php';
+                                                                $sql = "SELECT * from Equipment  ";
+                                                                $meQuery = $conn->query($sql);
+                                                                $i = 0;
 
-                                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                                <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                                                while ($result = $meQuery->fetch(PDO::FETCH_ASSOC)) {
+                                                                ?>
+                                                                    <input class="form-check-input" id="equip[]" type="checkbox" name="equip[]" value="<?php echo $result['ID_Equipment']; ?>">
+                                                                    <label for="equip[]"><?php echo $result['Equipment_Name']; ?></label>
+                                                                <?php $i++;
+                                                                    if ($i == 1) {
+                                                                        echo '<br />';
+                                                                        $i = 0;
+                                                                    }
+                                                                } ?>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </div>
+
+                                                <div class="col-12 d-flex justify-content-end">
+
+                                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                                </div>
+
                                             </div>
-
-                                        </div>
                                     </form>
                                 </div>
                             </div>

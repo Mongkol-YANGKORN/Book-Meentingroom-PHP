@@ -123,7 +123,7 @@ include '../connect.php';
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../index.html" class='sidebar-link'>
+                            <a href="backend\logout.php" class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -216,11 +216,11 @@ include '../connect.php';
                                                         <label><?php echo $rs['Member_Address']; ?></label>
                                                     </div>
                                                 </div>
-                                            <?php } ?>
-                                            <div class="col-12 d-flex justify-content-end">
-                                                <a href="demo/auth-login.php" class="btn btn-warning me-1 mb-1">แก้ไข</a>
 
-                                            </div>
+                                                <div class="col-12 d-flex justify-content-end">
+                                                    <a href="memberEdit.php?ID_Member=<?php echo $rs["ID_Member"]; ?>" class="btn btn-warning me-1 mb-1">แก้ไข</a>
+                                                <?php } ?>
+                                                </div>
 
                                             </div>
 

@@ -123,7 +123,7 @@ session_start();
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../index.html" class='sidebar-link'>
+                            <a href="backend\logout.php" class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>
@@ -154,17 +154,28 @@ session_start();
                                         <div class="row">
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <label for="Type_Name-column">ประเภทอุปกรณ์</label>
-                                                    <input type="text" id="Type_Name-column" class="form-control" placeholder="ประเภทอุปกรณ์" name="Type_Name">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
                                                     <label for="Equipment_Name-column">ชื่ออุปกรณ์</label>
                                                     <input type="text" id="Equipment_Name-column" class="form-control" placeholder="ชื่ออุปกรณ์" name="Equipment_Name">
                                                 </div>
                                             </div>
+                                            <div class="col-md-6 col-12">
+                                                <label>ประเภทอุปกรณ์</label>
+                                                <?php
+                                                include '../connect.php';
+                                                $sql = "SELECT * FROM Type_Equipment ORDER BY ID_type asc";
+                                                $result = $conn->query($sql);
+                                                ?>
+
+                                                <select name="ID_type" id="ID_type" class="form-select"> ;
+                                                    <option selected>เลือก..</option>
+                                                    <?php foreach ($result as $results) { ?>
+                                                        <option value="<?php echo $results["ID_type"]; ?>">
+                                                            <?php echo $results["Name_type"]; ?>
+                                                        </option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label for="Num_Equipment-column">จำนวนอุปกรณ์</label>
