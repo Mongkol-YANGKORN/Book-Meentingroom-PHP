@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include '../connect.php';
 include './head.php';
@@ -89,9 +90,7 @@ include './head.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
-                                <li class="submenu-item ">
-                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
-                                </li>
+
                             </ul>
                         </li>
 

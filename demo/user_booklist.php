@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include '../connect.php';
 ?>
@@ -8,16 +9,21 @@ include '../connect.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room</title>
+    <title>Dashborad</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
 
+
+    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+
+
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap%22");
 
@@ -29,10 +35,14 @@ include '../connect.php';
             font-family: "Prompt", sans-serif;
         }
     </style>
-    <!-- datetime -->
-    <link rel="stylesheet" href="js/jquery.datetimepicker.min.css">
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery.datetimepicker.full.js"></script>
+
+
+    <link href='<?= $fullcalendar_path ?>/core/main.css' rel='stylesheet' />
+    <link href='<?= $fullcalendar_path ?>/daygrid/main.css' rel='stylesheet' />
+
+    <script src='<?= $fullcalendar_path ?>/core/main.js'></script>
+    <script src='<?= $fullcalendar_path ?>/daygrid/main.js'></script>
+
 </head>
 
 <body>
@@ -48,7 +58,7 @@ include '../connect.php';
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                         </div>
                     </div>
-                </div>l;
+                </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
@@ -245,10 +255,10 @@ include '../connect.php';
                                                                 ?></td>
                                                             <td>
                                                                 <!-- นี่ไง -->
-                                                                <a href="book_detailShow.php?ID_Booked=<?php echo $rs["ID_Booked"]; ?>" class="btn-sm btn-success">แสดง</a>
+                                                                <a href="userbookshow.php?ID_Booked=<?php echo $rs["ID_Booked"]; ?>" class="btn-sm btn-success">แสดง</a>
                                                             </td>
                                                             <td>
-                                                                <a href="book_roomEdit.php?ID_Booked=<?php echo $rs["ID_Booked"]; ?>" class="btn-sm btn-warning">แก้ไข</a>
+                                                                <a href="usereditbook.php?ID_Booked=<?php echo $rs["ID_Booked"]; ?>" class="btn-sm btn-warning">แก้ไข</a>
                                                             </td>
                                                             <td>
                                                                 <a href="backend\bookdelete.php?ID_Booked=<?php echo $rs["ID_Booked"]; ?>" class="btn-sm btn-danger">ลบ</a>
@@ -277,7 +287,15 @@ include '../connect.php';
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 
+    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="assets/js/pages/dashboard.js"></script>
+
     <script src="assets/js/main.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="js/fullcalendar-2.1.1/lib/moment.min.js"></script>
+    <script type="text/javascript" src="js/fullcalendar-2.1.1/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="js/fullcalendar-2.1.1/lang/th.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 </body>
 
 </html>

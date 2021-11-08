@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 //Connect MSSQL
 $serverName = 'localhost';
@@ -30,11 +31,11 @@ if (!empty($_POST)) {
             if (strlen($tel) < 10) {
                 echo 'เบอร์โทรศัพท์ไม่ครบ 10 ตัวอักษร';
             } else {
-                //$password = sha1($password);
+                $passwords = sha1($password);
                 $stm = $conn->prepare("INSERT INTO Member (Username, Password, Member_Name,Member_Address,Member_Tel,ID_Division) 
                                             VALUES (:Username, :Password,:Member_Name,:Address, :Member_Tel, :ID_Division)");
                 $stm->bindParam("Username", $_POST['Username']);
-                $stm->bindParam("Password", $_POST['Password']);
+                $stm->bindParam("Password", $passwords);
                 $stm->bindParam("Member_Name", $_POST["Member_Name"]);
                 $stm->bindParam("Address", $_POST["Address"]);
                 $stm->bindParam("Member_Tel", $_POST["Member_Tel"]);

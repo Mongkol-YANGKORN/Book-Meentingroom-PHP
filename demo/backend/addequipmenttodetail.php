@@ -25,7 +25,12 @@ if (isset($_POST['equip'])) {
             $stm->bindParam("ID_Booked", $book);
             $stm->bindParam("ID_Equipment", $value);
             $stm->execute();
-            header(":Location:http://localhost/meetingroom/demo/book_detail.php");
+
+            if ($_SESSION["Responsibility"] == 'User') {
+                header("Location:http://localhost/meetingroom/demo/user_booklist.php");
+            } else {
+                header(":Location:http://localhost/meetingroom/demo/book_detail.php");
+            }
         }
     }
 }

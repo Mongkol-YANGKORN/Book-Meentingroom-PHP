@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 //Connect MSSQL
 $serverName = 'localhost';

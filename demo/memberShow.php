@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include '../connect.php';
 ?>
@@ -84,9 +85,7 @@ include '../connect.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
-                                <li class="submenu-item ">
-                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
-                                </li>
+
                             </ul>
                         </li>
 
@@ -177,18 +176,15 @@ include '../connect.php';
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="Username-column">Username</label>
+                                                        <br>
                                                         <label><?php echo $rs['Username']; ?></label>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="Password-column">Password</label>
-                                                        <label><?php echo $rs['Password']; ?></label>
-                                                    </div>
-                                                </div>
+
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>แผนก</label>
+                                                        <br>
                                                         <label><?php echo $rs['Division_Name']; ?></label>
 
                                                     </div>
@@ -196,24 +192,28 @@ include '../connect.php';
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="Job_title-column">ตำแหน่งงาน</label>
+                                                        <br>
                                                         <label><?php echo $rs['Job_title']; ?></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="Responsibility-column">บทบาท</label>
+                                                        <br>
                                                         <label><?php echo $rs['Responsibility']; ?></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="Member_Tel-column">เบอร์โทรศัพท์</label>
+                                                        <br>
                                                         <label><?php echo $rs['Member_Tel']; ?></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Address-column">ที่อยู่</label>
+                                                        <br>
                                                         <label><?php echo $rs['Member_Address']; ?></label>
                                                     </div>
                                                 </div>

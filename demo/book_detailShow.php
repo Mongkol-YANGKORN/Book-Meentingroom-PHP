@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include '../connect.php';
 ?>
@@ -88,9 +89,7 @@ include '../connect.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
-                                <li class="submenu-item ">
-                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
-                                </li>
+
                             </ul>
                         </li>
 
@@ -174,24 +173,28 @@ include '../connect.php';
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="Member_Name-column">จำนวนผู้เข้าประชุม</label>
+                                                        <br>
                                                         <label><?php echo $rs['Num_User'] . " คน" ?></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="Username-column">ชื่อผู้จอง</label>
+                                                        <br>
                                                         <label><?php echo $rs['Member_Name'] ?></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="Password-column">เบอร์โทรศัทพ์</label>
+                                                        <br>
                                                         <label><?php echo $rs['Member_Tel'] ?></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>เวลาเริ่มต้น</label>
+                                                        <br>
                                                         <label><?php echo $rs['Event_Start'] ?></label>
 
                                                     </div>
@@ -199,6 +202,7 @@ include '../connect.php';
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="Job_title-column">เวลาสิ้นสุด</label>
+                                                        <br>
                                                         <label><?php echo $rs['Event_End'] ?></label>
                                                     </div>
                                                 </div>

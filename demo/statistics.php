@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include '../connect.php';
 
@@ -89,9 +90,7 @@ include '../connect.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
-                                <li class="submenu-item ">
-                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
-                                </li>
+
                             </ul>
                         </li>
 
@@ -178,9 +177,9 @@ include '../connect.php';
                                                     <div class="form-group has-icon-left">
                                                         <label for="ID_Member-column">วัน-เดือน-ปี สิ้นสุด</label>
                                                         <div class="position-relative">
-                                                            <input name='date2' id="datetime" class="form-control" placeholder="วันที่สิ้นสุด" />
+                                                            <input name='date2' id="datetime2" class="form-control" placeholder="วันที่สิ้นสุด" />
                                                             <script>
-                                                                $("#datetime").datetimepicker({
+                                                                $("#datetime2").datetimepicker({
                                                                     step: 15
                                                                 });
                                                             </script>
@@ -192,6 +191,7 @@ include '../connect.php';
                                                     <div class="col-12 d-flex justify-content-end">
                                                         <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                                         <button type="submit" class="btn btn-primary me-1 mb-1">ค้นหา</button>
+                                                        <input class="btn btn-info me-1 mb-1" name="print" type="submit" id="non-printable" value="พิมพ์รายงาน" onClick="window.print()" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -211,7 +211,8 @@ include '../connect.php';
                                             </thead>
                                             <?php
                                             if (!isset($_GET['action'])) {
-                                                $sql = ("SELECT DISTINCT Room_Name FROM Booked INNER JOIN Room ON Booked.ID_Room=Room.ID_Room");
+                                                $sql = ("SELECT DISTINCT Room_Name FROM Booked 
+                                                INNER JOIN Room ON Booked.ID_Room=Room.ID_Room");
                                                 $query = $conn->query($sql);
                                             ?>
                                                 <tbody><?php

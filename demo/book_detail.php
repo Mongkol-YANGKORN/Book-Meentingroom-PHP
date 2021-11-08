@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include '../connect.php';
 include './head.php';
@@ -89,9 +90,7 @@ include './head.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
-                                <li class="submenu-item ">
-                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
-                                </li>
+
                             </ul>
                         </li>
 
@@ -255,7 +254,7 @@ include './head.php';
                                                     <!-- <th>หัวข้อการประชุม</th> -->
 
                                                     <th>จำนวนผู้เข้าประชุม</th>
-                                                    <th>สถานะ</th>
+                                                    <!--<th>สถานะ</th>-->
                                                     <th>แสดง</th>
                                                     <th>แก้ไข</th>
                                                     <!--<th>ยกเลิก</th>-->
@@ -309,25 +308,25 @@ include './head.php';
                                                                 echo $rs['Num_User'];
 
                                                                 ?></td>
-                                                            <td><?php
-                                                                $timezone = new DateTimeZone("Asia/Bangkok");
-                                                                $bangkokTime = new DateTime("now", $timezone);
-                                                                $result = $bangkokTime->format('Y-m-d H:i:s');
-                                                                $result1 = $rs['Event_Start'];
-                                                                $late = (strtotime($result1) - strtotime($result));
-                                                                $late = ($late / (60 * 60));
-                                                                if ($late >  60) {
-                                                                    echo 'การจองจบไปแล้ว';
-                                                                    echo $late;
-                                                                } elseif ($late >  15) {
-                                                                    echo 'ยกเลิก';
-                                                                    echo $late;
-                                                                } elseif ($late < 0) {
-                                                                    echo 'การจองจบไปแล้ว';
-                                                                    echo $late;
-                                                                }
-                                                                echo $late;
-                                                                ?></td>
+                                                            <!--<td><?php
+                                                                    //$timezone = new DateTimeZone("Asia/Bangkok");
+                                                                    //$bangkokTime = new DateTime("now", $timezone);
+                                                                    //$result = $bangkokTime->format('Y-m-d H:i:s');
+                                                                    //$result1 = $rs['Event_Start'];
+                                                                    //$late = (strtotime($result1) - strtotime($result));
+                                                                    //$late = ($late / (60 * 60));
+                                                                    //if ($late >  60) {
+                                                                    //    echo 'การจองจบไปแล้ว';
+                                                                    //    echo $late;
+                                                                    //} elseif ($late >  15) {
+                                                                    //     echo 'ยกเลิก';
+                                                                    //     echo $late;
+                                                                    //} elseif ($late < 0) {
+                                                                    //    echo 'การจองจบไปแล้ว';
+                                                                    //    echo $late;
+                                                                    // }
+                                                                    //echo $late;
+                                                                    ?></td>-->
                                                             <td>
 
                                                                 <a href="book_detailShow.php?ID_Booked=<?php echo $rs["ID_Booked"]; ?>" class="btn-sm btn-success">แสดง</a>

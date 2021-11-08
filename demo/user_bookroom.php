@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include '../connect.php';
 ?>
@@ -169,42 +170,15 @@ include '../connect.php';
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label>อุปกรณ์เพิ่มเติม</label>
-                                                    </div>
-                                                    <li class="d-inline-block me-2 mb-1">
-                                                        <div class="form-check">
-                                                            <div class="checkbox">
-                                                                <?php
-                                                                include '../connect.php';
-                                                                $sql = "SELECT * from Equipment  ";
-                                                                $meQuery = $conn->query($sql);
-                                                                $i = 0;
 
-                                                                while ($result = $meQuery->fetch(PDO::FETCH_ASSOC)) {
-                                                                ?>
-                                                                    <input class="form-check-input" id="equip[]" type="checkbox" name="equip[]" value="<?php echo $result['ID_Equipment']; ?>">
-                                                                    <label for="equip[]"><?php echo $result['Equipment_Name']; ?></label>
-                                                                <?php $i++;
-                                                                    if ($i == 1) {
-                                                                        echo '<br />';
-                                                                        $i = 0;
-                                                                    }
-                                                                } ?>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </div>
 
-                                                <div class="col-12 d-flex justify-content-end">
+                                            <div class="col-12 d-flex justify-content-end">
 
-                                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                                </div>
-
+                                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                             </div>
+
+                                        </div>
                                     </form>
                                 </div>
                             </div>

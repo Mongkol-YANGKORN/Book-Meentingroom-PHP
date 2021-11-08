@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include '../connect.php';
 ?>
@@ -88,9 +89,7 @@ include '../connect.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
-                                <li class="submenu-item ">
-                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
-                                </li>
+
                             </ul>
                         </li>
 
@@ -155,7 +154,6 @@ include '../connect.php';
                                     <div class="card-body">
                                         <form class="form" method="post" action="statisticsshow.php">
                                             <div class="row">
-
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group has-icon-left">
                                                         <label for="ID_Member-column">วัน-เดือน-ปี เริ่มต้น</label>
@@ -177,9 +175,9 @@ include '../connect.php';
                                                     <div class="form-group has-icon-left">
                                                         <label for="ID_Member-column">วัน-เดือน-ปี สิ้นสุด</label>
                                                         <div class="position-relative">
-                                                            <input name='date2' id="datetime" class="form-control" placeholder="วันที่สิ้นสุด" />
+                                                            <input name='date2' id="datetime2" class="form-control" placeholder="วันที่สิ้นสุด" />
                                                             <script>
-                                                                $("#datetime").datetimepicker({
+                                                                $("#datetime2").datetimepicker({
                                                                     step: 15
                                                                 });
                                                             </script>
@@ -188,9 +186,11 @@ include '../connect.php';
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                     <div class="col-12 d-flex justify-content-end">
                                                         <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                                         <button type="submit" class="btn btn-primary me-1 mb-1">ค้นหา</button>
+                                                        <input class="btn btn-info me-1 mb-1" name="print" type="submit" id="non-printable" value="พิมพ์รายงาน" onClick="window.print()" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -209,28 +209,32 @@ include '../connect.php';
                                             if (!isset($_GET['action'])) {
                                                 if (empty($_POST['date'])) {
                                                     $dateseach = $_POST['date2'];
-                                                    $sql = "SELECT DISTINCT Room_Name FROM Booked
-                                                     INNER JOIN Room ON Booked.ID_Room=Room.ID_Room 
-                                                     where Booked.Event_End = Convert(DATETIME ,'$dateseach')";
+                                                    $sql = ("SELECT DISTINCT Room_Name FROM Booked 
+                                                    INNER JOIN Room ON Booked.ID_Room=Room.ID_Room
+                                                     where Booked.Event_End = Convert(DATETIME ,'$dateseach')");
                                                     $query = $conn->query($sql);
                                                 } elseif (empty($_POST['date2'])) {
                                                     $dateseach = $_POST['date'];
-                                                    $sql = "SELECT DISTINCT Room_Name FROM Booked
-                                                     INNER JOIN Room ON Booked.ID_Room=Room.ID_Room 
-                                                     where Booked.Event_Start = Convert(DATETIME ,'$dateseach')";
+                                                    $sql = ("SELECT DISTINCT Room_Name FROM Booked 
+                                                    INNER JOIN Room ON Booked.ID_Room=Room.ID_Room
+                                                     where Booked.Event_Start = Convert(DATETIME ,'$dateseach')");
                                                     $query = $conn->query($sql);
                                                 } elseif (empty($_POST['date'] && $_POST['date2'])) {
-                                                    $sql = ("SELECT DISTINCT Room_Name FROM Booked INNER JOIN Room ON Booked.ID_Room=Room.ID_Room");
+                                                    $sql = ("SELECT DISTINCT Room_Name FROM Booked 
+                                                    INNER JOIN Room ON Booked.ID_Room=Room.ID_Room");
                                                     $query = $conn->query($sql);
                                                 } else {
                                                     $dateseach = $_POST['date'];
                                                     $dateseach2 = $_POST['date2'];
                                                     $user = $_SESSION["login_id"];
-                                                    $sql = "SELECT * FROM Booked INNER JOIN Room ON Booked.ID_Room=Room.ID_Room 
-                                                    Where  Booked.Event_Start = Convert(DATETIME ,'$dateseach') 
-                                                    And Booked.Event_End = Convert(DATETIME ,'$dateseach2')";
+                                                    echo $dateseach;
+                                                    echo $dateseach2;
+                                                    $sql = ("SELECT DISTINCT Room_Name FROM Booked 
+                                                    INNER JOIN Room ON Booked.ID_Room=Room.ID_Room where Booked.Event_Start = Convert(DATETIME ,'$dateseach') 
+                                                    And Booked.Event_End = Convert(DATETIME ,'$dateseach2')");
                                                     $query = $conn->query($sql);
                                                 }
+
                                             ?>
                                                 <tbody><?php
                                                         $i = 1;
@@ -261,6 +265,7 @@ include '../connect.php';
                         </div>
                     </div>
                 </div>
+
             </section>
 
 

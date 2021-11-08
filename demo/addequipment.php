@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include '../connect.php';
 ?>
@@ -52,80 +53,34 @@ include '../connect.php';
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.php" class='sidebar-link'>
+                            <a href="user_dashboard.php" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item  has-sub">
-                            <a class='sidebar-link'>
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>ข้อมูลผู้ใช้</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="memberlist.php">ข้อมูลผู้ใช้ทั้งหมด</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="memberRigister.php">เพิ่มข้อมูลผู้ใช้</a>
-                                </li>
-
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-item  has-sub">
-                            <a class='sidebar-link'>
-                                <i class="bi bi-easel-fill"></i>
-                                <span>จัดการห้องประชุม</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="roomList.php">ข้อมูลห้องประชุมทั้งหมด</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
-                                </li>
-                            </ul>
-                        </li>
-
                         <li class="sidebar-item  ">
-                            <a href="book_room.php" class='sidebar-link'>
+                            <a href="user_bookroom.php" class='sidebar-link'>
                                 <i class="bi bi-display"></i>
                                 <span>จองห้องประชุม</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="book_detail.php" class='sidebar-link'>
+                            <a href="user_booklist.php" class='sidebar-link'>
                                 <i class="bi bi-credit-card"></i>
-                                <span>ข้อมูลการจองของฉัน</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="book_user.php" class='sidebar-link'>
-                                <i class="bi bi-credit-card-2-back-fill"></i>
-                                <span>ข้อมูลการจองของผู้ใช้งาน</span>
+                                <span>ข้อมูลการจอง</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="statistics.php" class='sidebar-link'>
-                                <i class="bi bi-collection-fill"></i>
-                                <span>รายงานสถิติประจำเดือน</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
-                            <a href="personaldetail.php" class='sidebar-link'>
+                            <a href="user_personaldetail.php" class='sidebar-link'>
                                 <i class="bi bi-person-square"></i>
                                 <span>ข้อมูลส่วนตัว</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="backend\logout.php" class='sidebar-link'>
+                            <a href="../index.html" class='sidebar-link'>
                                 <i class="bi bi-power"></i>
                                 <span>Logout</span>
                             </a>

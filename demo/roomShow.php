@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 include '../connect.php';
 ?>
@@ -88,9 +89,7 @@ include '../connect.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
-                                <li class="submenu-item ">
-                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
-                                </li>
+
                             </ul>
                         </li>
 
@@ -155,7 +154,7 @@ include '../connect.php';
                                     include '../connect.php';
                                     if (isset($_GET['ID_Room'])) {
                                         $room =  $_GET['ID_Room'];
-                                        $meSQL = ("SELECT dbo.Room.ID_Room,Num_Seat,Room_Dscription from Room INNER JOIN dbo.Room_Detail ON Room.ID_Room = Room_Detail.ID_Room 
+                                        $meSQL = ("SELECT * from Room INNER JOIN dbo.Room_Detail ON Room.ID_Room = Room_Detail.ID_Room 
                                         inner join dbo.Equipment on Equipment.ID_Equipment = Room_Detail.ID_Equipment 
                                         Where dbo.Room.ID_Room = '$room'");
                                         $meQuery = $conn->query($meSQL);

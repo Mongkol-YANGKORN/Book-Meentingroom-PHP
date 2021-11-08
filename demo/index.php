@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include '../connect.php';
 $fullcalendar_path = "fullcalendar-4.4.2/packages/";
@@ -164,9 +165,7 @@ include '../demo/head.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
-                                <li class="submenu-item ">
-                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
-                                </li>
+
                             </ul>
                         </li>
 
@@ -333,58 +332,7 @@ include '../demo/head.php';
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4>ปฏิทิน</h4>
-                                    </div>
 
-                                    <div class="container">
-                                        <div class="row">
-
-                                            <div class='col-md-12'>
-                                                <div class="panel panel-default">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div id='calendar'></div>
-                                                                <div style="margin:10px 0 50px 0;" align="center">
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <div id='calendar'></div>
-
-                                        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
-                                        <script type="text/javascript">
-                                            $(function() {
-                                                // กำหนด element ที่จะแสดงปฏิทิน
-                                                var calendarEl = $("#calendar")[0];
-
-                                                // กำหนดการตั้งค่า
-                                                var calendar = new FullCalendar.Calendar(calendarEl, {
-                                                    plugins: ['dayGrid']
-                                                });
-
-                                                // แสดงปฏิทิน 
-
-
-                                            });
-                                            calendar.render();
-                                        </script>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
 

@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 //Connect MSSQL
 $serverName = 'localhost';
@@ -34,10 +35,21 @@ if (!empty($_POST)) {
         $stm->bindParam("ID_Member", $_SESSION["login_id"]);
         $stm->execute();
         if ($stm->rowCount()) {
-            header("Location:http://localhost/meetingroom/demo/addequipment.php");
+            echo "Record add successfully";
+            if ($_SESSION["Responsibility"] == 'User') {
+                header("Location:http://localhost/meetingroom/demo/user_booklist.php");
+            } else {
+                header("Location:http://localhost/meetingroom/demo/book_detail.php");
+            }
         } else {
-            echo "Record add Faill";
-            header("refresh: 2;Location:http://localhost/meetingroom/demo/book_room.php");
+            echo 'บันทึกรายการผิดพลาด<br>';
+
+            if ($_SESSION["Responsibility"] == 'User') {
+                echo '<a href=http://localhost/meetingroom/demo/user_booklist.php">บันทึกรายการผิดพลาด</a>';
+            } else {
+
+                echo '<a href=http://localhost/meetingroom/demo/book_detail.php">บันทึกรายการผิดพลาด</a>';
+            }
         }
         $conn = null;
     }

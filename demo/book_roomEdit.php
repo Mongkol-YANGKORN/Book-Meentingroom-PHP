@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include '../connect.php';
 ?>
@@ -86,9 +87,7 @@ include '../connect.php';
                                 <li class="submenu-item ">
                                     <a href="roomAdd.php">เพิ่มข้อมูลห้องประชุม</a>
                                 </li>
-                                <li class="submenu-item ">
-                                    <a href="EquipmentAdd.php">เพิ่มข้อมูลอุปกรณ์ห้องประชุม</a>
-                                </li>
+
                             </ul>
                         </li>
 
@@ -152,7 +151,7 @@ include '../connect.php';
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="demo\backend\#">
+                                    <form class="form" method="post" action="../demo/backend/bookeditdata.php">
                                         <div class="row">
                                             <div class="col-md-6 col-12">
 
@@ -204,24 +203,14 @@ include '../connect.php';
                                                     <input type="number" id="contact-info-vertical" class="form-control" name="Num_seat" placeholder="จำนวนผู้เข้าร่วม">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Job_title-column">ชื่อผู้จอง</label>
-                                                    <input type="text" id="Job_title-column" class="form-control" name="Job_title" placeholder="ชื่อผู้จอง">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="Job_title-column">เบอร์โทรศัพท์</label>
-                                                    <input type="text" id="Job_title-column" class="form-control" name="Job_title" placeholder="เบอร์โทรศัพท์">
-                                                </div>
-                                            </div>
+
+
 
                                             <div class="col-md-6 col-12">
                                                 <div class="form-group has-icon-left">
                                                     <label for="ID_Member-column">เวลาเริ่มต้น</label>
                                                     <div class="position-relative">
-                                                        <input id="datetime" class="form-control" placeholder="เลือกเวลาเริ่มต้น" />
+                                                        <input name="datetime" id="datetime" class="form-control" placeholder="เลือกเวลาเริ่มต้น" />
                                                         <script>
                                                             $("#datetime").datetimepicker({
                                                                 step: 15
@@ -237,7 +226,7 @@ include '../connect.php';
                                                 <div class="form-group has-icon-left">
                                                     <label for="ID_Member-column">เวลาสิ้นสุด</label>
                                                     <div class="position-relative">
-                                                        <input id="datetime2" class="form-control" placeholder="เลือกเวลาสิ้นสุด" />
+                                                        <input name="datetime2" id="datetime2" class="form-control" placeholder="เลือกเวลาสิ้นสุด" />
                                                         <script>
                                                             $("#datetime2").datetimepicker({
                                                                 step: 15
